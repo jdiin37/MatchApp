@@ -1,0 +1,26 @@
+.tablink {
+    background-color: rgba(0,0,0,0.4);
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 50%;
+}
+
+.tablink:hover {
+    background-color: rgba(0,0,0,0.2);;
+}
+
+/* Style the tab content */
+.tabcontent {
+    color: black;
+    display: none;
+    padding: 50px;
+/*     text-align: center; */
+}
+
+#tabLogin {background-color:white;}
+#tabReg {background-color:white;}

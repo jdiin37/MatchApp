@@ -2,6 +2,8 @@ function bindListener(){
 	$('#a_login').click(function() {
 		$('#login_Modal').css('display', "block");
 		document.getElementById("defaultOpen").click();
+		stateChange(true, '#login_account');
+		stateChange(true, '#login_password');
 	});
 
 	// When the user clicks on <span> (x), close the modal

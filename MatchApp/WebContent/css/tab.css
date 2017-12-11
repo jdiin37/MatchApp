@@ -1,4 +1,4 @@
-.tablink {
+.tablink_login {
     background-color: rgba(0,0,0,0.4);
     color: black;
     float: left;
@@ -10,7 +10,7 @@
     width: 50%;
 }
 
-.tablink:hover {
+.tablink_login:hover {
     background-color: rgba(0,0,0,0.2);;
 }
 

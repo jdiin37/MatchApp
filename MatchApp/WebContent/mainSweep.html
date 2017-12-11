@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/w3c.css">
 <link rel="stylesheet" href="css/model.css">
-<link rel="stylesheet" href="css/tab.css">
+<link rel="stylesheet" href="css/tab.css?1">
 <link rel="stylesheet" href="css/my.css">
 
 <script src="scripts/jquery-1.11.1.min.js"></script>
@@ -43,14 +43,13 @@ html, body {
 				<a href="#menu" class="w3-bar-item w3-button w3-bottombar w3-border-blue">找人打掃</a>
 				<a href="#contact" class="w3-bar-item w3-button w3-bottombar w3-border-green">幫忙打掃</a>
 				<a href="#" id="a_login" class="w3-bar-item w3-button w3-bottombar w3-border-gary">登入</a>
-				<div class="w3-dropdown-click">
+				<div class="w3-dropdown-click" id="a_loginOK" style="display: none;">
 					<button class="w3-button" onclick="menuDropdown()">
-					<span class="fa fa-caret-down"></span>
-						使用者:<span id=span_user_id></span>
+						<span class="fa fa-angle-down"></span> 使用者:<span id=span_user_id></span>
 					</button>
 					<div class="w3-dropdown-content w3-bar-block w3-card-4" id="menu_user">
 						<a href="#" class="w3-bar-item w3-button">基本資料</a>
-						<a href="#" class="w3-bar-item w3-button">登出</a>
+						<a href="#" class="w3-bar-item w3-button" onclick="loginOut();">登出</a>
 					</div>
 				</div>
 			</div>
@@ -72,29 +71,44 @@ html, body {
 				<span class="close" id="close_login">&times;</span>
 				<div id="tabLogin" class="tabcontent_login">
 					<form class="w3-container">
-						<label class="w3-text-blue"><b>帳號</b></label>&ensp;<span></span> <input class="w3-input"
-							type="text" id="login_id"> <br /> <label class="w3-text-blue"><b>密碼</b></label>&ensp;<span></span>
-						<input class="w3-input" type="text" id="login_pw"> <br />
+						<label class="w3-text-blue">
+							<b>帳號</b>
+						</label>
+						&ensp;<span></span> <input class="w3-input" type="text" id="login_id"> <br />
+						<label class="w3-text-blue">
+							<b>密碼</b>
+						</label>
+						&ensp;<span></span> <input class="w3-input" type="password" id="login_pw"> <br />
 						<button class="w3-btn w3-blue" id="btn_login">登入</button>
-
+						&ensp;<span id="login_status" style="color: red;"></span>
 					</form>
 				</div>
 
 				<div id="tabReg" class="tabcontent_login">
 					<form class="w3-container">
-						<label class="w3-text-teal"><b>帳號</b></label>&ensp;<span></span> <input class="w3-input"
-							type="text" id="reg_id"> <br /> <label class="w3-text-teal"><b>密碼</b></label>&ensp;<span></span>
-						<input class="w3-input" type="text" id="reg_pw"> <br /> <label class="w3-text-teal"><b>再次確認密碼</b></label>&ensp;<span></span>
-						<input class="w3-input" type="text" id="reg_pw_re"> <br /> <label
-							class="w3-text-teal"><b>E-Mail</b></label>&ensp;<span></span> <input class="w3-input"
-							type="text" id="reg_email"> <br />
+						<label class="w3-text-teal">
+							<b>帳號</b>
+						</label>
+						&ensp;<span></span> <input class="w3-input" type="text" id="reg_id"> <br />
+						<label class="w3-text-teal">
+							<b>密碼</b>
+						</label>
+						&ensp;<span></span> <input class="w3-input" type="password" id="reg_pw"> <br />
+						<label class="w3-text-teal">
+							<b>再次確認密碼</b>
+						</label>
+						&ensp;<span></span> <input class="w3-input" type="password" id="reg_pw_re"> <br />
+						<label class="w3-text-teal">
+							<b>E-Mail</b>
+						</label>
+						&ensp;<span></span> <input class="w3-input" type="text" id="reg_email"> <br />
 						<button class="w3-btn w3-teal" id="btn_reg">註冊</button>
-
+						&ensp;<span id="reg_status" style="color: red;"></span>
 					</form>
 				</div>
-
-				<button class="tablink_login" onclick="Tab_change('tabLogin', this, 'white')" id="defaultOpen">登入</button>
-				<button class="tablink_login" onclick="Tab_change('tabReg', this, 'white')">註冊</button>
+				<br />
+				<button class="tablink_login w3-bottombar" onclick="Tab_change('tabLogin', this, 'white')" id="defaultOpen">登入</button>
+				<button class="tablink_login w3-bottombar" onclick="Tab_change('tabReg', this, 'white')">註冊</button>
 
 			</div>
 			<!-- 			<div class="modal-footer"> -->
@@ -236,9 +250,11 @@ html, body {
 			tablinks = document.getElementsByClassName("tablink_login");
 			for (i = 0; i < tablinks.length; i++) {
 				tablinks[i].style.backgroundColor = "";
+				tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
 			}
 			document.getElementById(TabName).style.display = "block";
 			elmnt.style.backgroundColor = color;
+			elmnt.className += " w3-border-red";
 
 		}
 		// Get the element with id="defaultOpen" and click on it

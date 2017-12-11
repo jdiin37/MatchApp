@@ -40,6 +40,29 @@ public class User {
 	@POST 
 	@Consumes({ MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/Login")
+	public String Login(user_basicObj cre_user) {
+		String users = null;
+
+		try {
+			//user_basicObj newUser = new Gson().fromJson(cre_user, user_basicObj.class);
+			user_basicObj newUser = cre_user;
+			ProjectManager projectManager = new ProjectManager();
+			newUser = projectManager.IsUser(newUser);
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(newUser));
+			users = gson.toJson(newUser);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return users;
+	}
+	
+	@POST 
+	@Consumes({ MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/Create")
 	public String Create(user_basicObj cre_user) {
 		String users = null;

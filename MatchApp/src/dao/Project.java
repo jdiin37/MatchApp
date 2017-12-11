@@ -24,6 +24,26 @@ public class Project {
 		}
 	}
 
+	public user_basicObj IsUser(Connection connection, user_basicObj userObj) throws Exception {
+		user_basicObj Object = new user_basicObj();
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT user_id,password,auth,email FROM user_basic Where user_id = ? and password = ?");
+			ps.setString(1, userObj.getUser_id());
+			ps.setString(2, userObj.getPassword());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {				
+				Object.setUser_id(rs.getString("user_id"));
+				Object.setPassword("****");
+				Object.setAuth(rs.getString("auth"));
+				Object.setEmail(rs.getString("email"));
+			}
+			return Object;
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+	
 	public user_basicObj CreateUser(Connection connection, user_basicObj userObj) throws Exception {
 		try {
 			PreparedStatement ps = connection.prepareStatement(

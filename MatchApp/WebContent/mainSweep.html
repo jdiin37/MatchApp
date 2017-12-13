@@ -34,93 +34,30 @@ html, body {
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
-			<a href="#home" class="w3-bar-item w3-button">MatchApp</a>
+			<a href="#home" class="w3-bar-item w3-button w3-hover-red">MatchApp</a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
 			<div class="w3-right w3-hide-small">
-
-				<a href="#about" class="w3-bar-item w3-button w3-bottombar w3-border-red">首頁</a>
-				<a href="#menu" class="w3-bar-item w3-button w3-bottombar w3-border-blue">找人打掃</a>
-				<a href="#contact" class="w3-bar-item w3-button w3-bottombar w3-border-green">幫忙打掃</a>
-				<a href="#" id="a_login" class="w3-bar-item w3-button w3-bottombar w3-border-gary">登入</a>
+				
+				<a href="#about" class="w3-bar-item w3-button w3-border-right w3-hover-yellow">首頁</a>
+				<a href="#menu" class="w3-bar-item w3-button w3-border-right w3-hover-yellow">找人打掃</a>
+				<a href="#contact" class="w3-bar-item w3-button w3-border-right w3-hover-yellow">幫忙打掃</a>
+				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-yellow">登入</a>
 				<div class="w3-dropdown-click" id="a_loginOK" style="display: none;">
-					<button class="w3-button" onclick="menuDropdown()">
-						<span class="fa fa-angle-down"></span> 使用者:<span id=span_user_id></span>
+					<button class="w3-button w3-white w3-hover-yellow" onclick="menuDropdown()">
+						 哈囉&nbsp;<span id=span_user_id></span>&ensp;<span class="fa fa-angle-down"></span>
 					</button>
-					<div class="w3-dropdown-content w3-bar-block w3-card-4" id="menu_user">
-						<a href="#" class="w3-bar-item w3-button">基本資料</a>
-						<a href="#" class="w3-bar-item w3-button" onclick="loginOut();">登出</a>
+					<div class="w3-dropdown-content w3-bar-block w3-border" id="menu_user" style="right:0">
+						<a href="#" class="w3-bar-item w3-button w3-hover-yellow">基本資料</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-yellow" onclick="loginOut();">登出</a>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
 
 	<!-- Header -->
-
-	<!-- The Modal -->
-	<div id="login_Modal" class="modal">
-
-		<!-- Modal content -->
-		<div class="modal-content">
-			<!-- 			<div class="modal-header"> -->
-			<!-- 				<span class="close" id="close_login">&times;</span> -->
-			<!-- 				<h2>Modal Header</h2> -->
-			<!-- 			</div> -->
-			<div class="modal-body">
-				<span class="close" id="close_login">&times;</span>
-				<div id="tabLogin" class="tabcontent_login">
-					<form class="w3-container">
-						<label class="w3-text-blue">
-							<b>帳號</b>
-						</label>
-						&ensp;<span></span> <input class="w3-input" type="text" id="login_id"> <br />
-						<label class="w3-text-blue">
-							<b>密碼</b>
-						</label>
-						&ensp;<span></span> <input class="w3-input" type="password" id="login_pw"> <br />
-						<button class="w3-btn w3-blue" id="btn_login">登入</button>
-						&ensp;<span id="login_status" style="color: red;"></span>
-					</form>
-				</div>
-
-				<div id="tabReg" class="tabcontent_login">
-					<form class="w3-container">
-						<label class="w3-text-teal">
-							<b>帳號</b>
-						</label>
-						&ensp;<span></span> <input class="w3-input" type="text" id="reg_id"> <br />
-						<label class="w3-text-teal">
-							<b>密碼</b>
-						</label>
-						&ensp;<span></span> <input class="w3-input" type="password" id="reg_pw"> <br />
-						<label class="w3-text-teal">
-							<b>再次確認密碼</b>
-						</label>
-						&ensp;<span></span> <input class="w3-input" type="password" id="reg_pw_re"> <br />
-						<label class="w3-text-teal">
-							<b>E-Mail</b>
-						</label>
-						&ensp;<span></span> <input class="w3-input" type="text" id="reg_email"> <br />
-						<button class="w3-btn w3-teal" id="btn_reg">註冊</button>
-						&ensp;<span id="reg_status" style="color: red;"></span>
-					</form>
-				</div>
-				<br />
-				<button class="tablink_login w3-bottombar" onclick="Tab_change('tabLogin', this, 'white')" id="defaultOpen">登入</button>
-				<button class="tablink_login w3-bottombar" onclick="Tab_change('tabReg', this, 'white')">註冊</button>
-
-			</div>
-			<!-- 			<div class="modal-footer"> -->
-			<!-- 				<h3>Modal Footer</h3> -->
-			<!-- 			</div> -->
-		</div>
-
-	</div>
-
-
-
-
 
 	<div style='height: 100px'></div>
 	<div class="w3-container w3-center">
@@ -234,31 +171,9 @@ html, body {
 	<!-- Footer -->
 	<footer class="w3-center w3-light-grey w3-padding-32">
 		<p>
-			Powered by
-			<a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
-				class="w3-hover-text-green">w3.css</a>
+			
 		</p>
 	</footer>
 
-	<script>
-		function Tab_change(TabName, elmnt, color) {
-			var i, tabcontent, tablinks;
-			tabcontent = document.getElementsByClassName("tabcontent_login");
-			for (i = 0; i < tabcontent.length; i++) {
-				tabcontent[i].style.display = "none";
-			}
-			tablinks = document.getElementsByClassName("tablink_login");
-			for (i = 0; i < tablinks.length; i++) {
-				tablinks[i].style.backgroundColor = "";
-				tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
-			}
-			document.getElementById(TabName).style.display = "block";
-			elmnt.style.backgroundColor = color;
-			elmnt.className += " w3-border-red";
-
-		}
-		// Get the element with id="defaultOpen" and click on it
-		document.getElementById("defaultOpen").click();
-	</script>
 </body>
 </html>

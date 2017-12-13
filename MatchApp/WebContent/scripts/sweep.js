@@ -59,6 +59,98 @@ function getCookie(cname) {
     return "";
 }
 
+//login click function
+function clickLogin(){	
+	var aflag = false;
+	var bflag = false
+	
+	if ($('#login_id').val().length > 0 && engnum_regex.test($('#login_id').val())) {		
+		stateChange(true, '#login_id');
+		login_obj.user_id = $('#login_id').val();
+		aflag = true;
+	} else {
+		stateChange(false, '#login_id', "請輸入英文或數字");
+		aflag = false
+	}
+	
+	if ($('#login_pw').val().length > 0 && engnum_regex.test($('#login_pw').val())) {		
+		stateChange(true, '#login_pw');
+		login_obj.password = $('#login_pw').val();
+		bflag = true;
+	} else {
+		stateChange(false, '#login_pw', "請輸入英文或數字");
+		bflag = false
+	}		
+	
+	if(aflag && bflag){
+		$.when(ajax_login()).done(function(data) {
+			if(data.user_id == undefined){
+				$('#login_status').html("帳號密碼有誤");
+			}else{
+				login_obj = data;
+				loginOK();
+			}
+		});			
+	}
+};
+
+function clickReg(){	
+	var aflag = false;
+	var bflag = false;
+	var cflag = false;
+	
+	if ($('#reg_id').val().length > 0 && engnum_regex.test($('#reg_id').val())) {		
+		stateChange(true, '#reg_id');
+		reg_obj.user_id = $('#reg_id').val();
+		aflag = true;
+	} else {
+		stateChange(false, '#reg_id', "請輸入英文或數字");
+		aflag = false
+	}
+	
+	if ($('#reg_pw').val().length > 0 && engnum_regex.test($('#reg_pw').val())) {		
+		stateChange(true, '#reg_pw');
+
+	} else {
+		stateChange(false, '#reg_pw', "請輸入英文或數字");
+	}
+	
+	if ($('#reg_pw_re').val().length > 0 && $('#reg_pw_re').val() == $('#reg_pw').val()) {		
+		stateChange(true, '#reg_pw_re');
+		reg_obj.password = $('#reg_pw').val();
+		bflag = true;
+	} else {
+		stateChange(false, '#reg_pw_re', "請輸入相同的密碼");
+		bflag = false
+	}
+	
+	if ($('#reg_email').val().length > 0 && email_regex.test($('#reg_email').val())) {		
+		stateChange(true, '#reg_email');
+		reg_obj.email = $('#reg_email').val();
+		cflag = true;
+	} else {
+		stateChange(false, '#reg_email', "請輸入正確的email格式");
+		cflag = false
+	}
+	
+	
+	if(aflag && bflag && cflag){
+		$.when(ajax_reg()).done(function(data) {
+			if(data.user_id == undefined){
+				$('#reg_status').html("此帳號已有人使用");
+			}else{
+				$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');
+				stateChange(true, '#reg_id',"","");
+				stateChange(true, '#reg_pw',"","");
+				stateChange(true, '#reg_pw_re',"","");
+				stateChange(true, '#reg_email',"","");
+			}
+		});			
+	}		
+}
+
+
+
 //bind
 
 function bindListener(){
@@ -89,96 +181,7 @@ function bindListener(){
 //		}
 	}
 	
-	$('#btn_login').click(function() {
-		
-		var aflag = false;
-		var bflag = false
-		
-		if ($('#login_id').val().length > 0 && engnum_regex.test($('#login_id').val())) {		
-			stateChange(true, '#login_id');
-			login_obj.user_id = $('#login_id').val();
-			aflag = true;
-		} else {
-			stateChange(false, '#login_id', "請輸入英文或數字");
-			aflag = false
-		}
-		
-		if ($('#login_pw').val().length > 0 && engnum_regex.test($('#login_pw').val())) {		
-			stateChange(true, '#login_pw');
-			login_obj.password = $('#login_pw').val();
-			bflag = true;
-		} else {
-			stateChange(false, '#login_pw', "請輸入英文或數字");
-			bflag = false
-		}		
-		
-		if(aflag && bflag){
-			$.when(ajax_login()).done(function(data) {
-				if(data.user_id == undefined){
-					$('#login_status').html("帳號密碼有誤");
-				}else{
-					login_obj = data;
-					loginOK();
-				}
-			});			
-		}
-	});
 	
-	$('#btn_reg').click(function(){
-		var aflag = false;
-		var bflag = false;
-		var cflag = false;
-		
-		if ($('#reg_id').val().length > 0 && engnum_regex.test($('#reg_id').val())) {		
-			stateChange(true, '#reg_id');
-			reg_obj.user_id = $('#reg_id').val();
-			aflag = true;
-		} else {
-			stateChange(false, '#reg_id', "請輸入英文或數字");
-			aflag = false
-		}
-		
-		if ($('#reg_pw').val().length > 0 && engnum_regex.test($('#reg_pw').val())) {		
-			stateChange(true, '#reg_pw');
-
-		} else {
-			stateChange(false, '#reg_pw', "請輸入英文或數字");
-		}
-		
-		if ($('#reg_pw_re').val().length > 0 && $('#reg_pw_re').val() == $('#reg_pw').val()) {		
-			stateChange(true, '#reg_pw_re');
-			reg_obj.password = $('#reg_pw').val();
-			bflag = true;
-		} else {
-			stateChange(false, '#reg_pw_re', "請輸入相同的密碼");
-			bflag = false
-		}
-		
-		if ($('#reg_email').val().length > 0 && email_regex.test($('#reg_email').val())) {		
-			stateChange(true, '#reg_email');
-			reg_obj.email = $('#reg_email').val();
-			cflag = true;
-		} else {
-			stateChange(false, '#reg_email', "請輸入正確的email格式");
-			cflag = false
-		}
-		
-		
-		if(aflag && bflag && cflag){
-			$.when(ajax_reg()).done(function(data) {
-				if(data.user_id == undefined){
-					$('#reg_status').html("此帳號已有人使用");
-				}else{
-					$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');
-					stateChange(true, '#reg_id',"","");
-					stateChange(true, '#reg_pw',"","");
-					stateChange(true, '#reg_pw_re',"","");
-					stateChange(true, '#reg_email',"","");
-				}
-			});			
-		}
-		
-	})
 	
 	//input change login
 	$('#login_id').change(function(){	
@@ -269,11 +272,9 @@ function checkisLogin(){
 }
 //loginOK
 function loginOK(){
-	$('#login_status').html("歡迎回來" + login_obj.user_id).css('color','green');					
-	$('#login_Modal').fadeOut(2000);
-	setCookie_user(login_obj.user_id);
-	iniLoginOK();
-
+	$('#login_status').html("歡迎回來" + login_obj.user_id + "3秒後自動回到主頁面..").css('color','green');					
+	setTimeout(function(){window.location.href = "/MatchApp"},3000);
+	setCookie_user(login_obj.user_id);	
 }
 
 function iniLoginOK(){

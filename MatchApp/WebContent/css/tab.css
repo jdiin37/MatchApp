@@ -1,12 +1,11 @@
 .tablink_login {
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.0);
     color: black;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
-    font-size: 17px;
+    padding: 14px 16px;ss    
     width: 50%;
 }
 
@@ -14,13 +13,33 @@
     background-color: rgba(0,0,0,0.2);;
 }
 
-/* Style the tab content */
-.tabcontent {
-    color: black;
-    display: none;
-    padding: 50px;
-/*     text-align: center; */
+#tabLogin {background-color:white;border: 1px solid #2196F3;padding-bottom:20px;}
+#tabReg {background-color:white;border: 1px solid #009688;padding-bottom:20px;}
+#tabForget {background-color:white;border: 1px solid #ff9800;padding-bottom:20px;}
+
+
+.w3-container label{
+	text-align:left;
 }
 
-#tabLogin {background-color:white;}
-#tabReg {background-color:white;}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}

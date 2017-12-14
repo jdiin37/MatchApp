@@ -99,20 +99,20 @@ function clickReg(){
 	var bflag = false;
 	var cflag = false;
 	
-	if ($('#reg_id').val().length > 0 && engnum_regex.test($('#reg_id').val())) {		
+	if ($('#reg_id').val().length > 4 && engnum_regex.test($('#reg_id').val())) {		
 		stateChange(true, '#reg_id');
 		reg_obj.user_id = $('#reg_id').val();
 		aflag = true;
 	} else {
-		stateChange(false, '#reg_id', "請輸入英文或數字");
+		stateChange(false, '#reg_id', "請輸入英文或數字,且長度至少四碼");
 		aflag = false
 	}
 	
-	if ($('#reg_pw').val().length > 0 && engnum_regex.test($('#reg_pw').val())) {		
+	if ($('#reg_pw').val().length > 4 && engnum_regex.test($('#reg_pw').val())) {		
 		stateChange(true, '#reg_pw');
 
 	} else {
-		stateChange(false, '#reg_pw', "請輸入英文或數字");
+		stateChange(false, '#reg_pw', "請輸入英文或數字,且長度至少四碼");
 	}
 	
 	if ($('#reg_pw_re').val().length > 0 && $('#reg_pw_re').val() == $('#reg_pw').val()) {		
@@ -272,7 +272,7 @@ function checkisLogin(){
 }
 //loginOK
 function loginOK(){
-	$('#login_status').html("歡迎回來" + login_obj.user_id + "3秒後自動回到主頁面..").css('color','green');					
+	$('#login_status').html("歡迎回來" + login_obj.user_id + ",3秒後自動回到主頁面..").css('color','green');					
 	setTimeout(function(){window.location.href = "/MatchApp"},3000);
 	setCookie_user(login_obj.user_id);	
 }

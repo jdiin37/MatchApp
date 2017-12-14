@@ -1,3 +1,26 @@
 #menu_user{
 	right:0;
 }
+
+.myRWD_height{
+	height:60px;	
+}
+
+@media (max-width: 910px){
+	.myRWD_height{
+		height:100px;
+	}
+}
+
+@media (max-width: 560px){
+	.myRWD_height{
+		height:150px;
+	}
+}
+
+@media (max-width: 420px){
+	.myRWD_height{
+		height:200px;
+	}
+}
+

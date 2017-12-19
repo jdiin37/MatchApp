@@ -24,3 +24,11 @@
 	}
 }
 
+.img_remove{
+	
+	padding:5px 10px 5px 10px;
+}
+.img_remove:hover{
+	cursor:pointer;
+	background-color:rgba(0,0,0,.11);
+}

@@ -25,14 +25,30 @@ html, body {
 	$(document).ready(function() {
 		checkisLogin();
 		bindListener();
-		var fileList  = document.querySelector('#fileField').files;
 		
+		//removeImg
+		$('body').on('click', 'span.img_remove', function() {
+		    // do something
+			$(this).parents('.w3-third').remove();
+		    $('#fileField').val('');
+		});
 	});
 </script>
 
 </head>
 <body>
+	<!-- The Modal -->
+	<div id="ImgModal" class="modal">
 
+		<!-- The Close Button -->
+		<span class="close">&times;</span>
+
+		<!-- Modal Content (The Image) -->
+		<img class="modal-content" id="img01">
+
+		<!-- Modal Caption (Image Text) -->
+		<div id="caption"></div>
+	</div>
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
@@ -104,9 +120,12 @@ html, body {
 					<textarea class="w3-input w3-border" style="resize: none"></textarea>
 				</div>
 				<div class="w3-twothird">
-					<label>場地照片</label>
-					<input id="fileField" name="files[]" type="file" class="w3-input w3-border w3-round" multiple onchange='getImg(event);'/>
-					<div id="img_panel">
+					<label>場地照片:</label>
+					<div class="w3-border" style="padding-bottom:16px;">
+						<input id="fileField" name="files[]" type="file" class="w3-input" onchange='getImg(event);' accept="image/*" />					
+						<div id="img_panel" class="w3-row-padding w3-margin-top">
+							
+						</div>
 					</div>
 				</div>
 			</div>
@@ -165,41 +184,67 @@ html, body {
 		</div>
 	</footer>
 	<script>
-	
 		//var ws = new WebSocket('ws://localhost:8443');
-	 	function getUrl() {
-	 		if(!!window.URL) {
-	 			return window.URL;
-	 		}
-	 		if(!!window.webkitURL) {
-	 			return window.webkitURL;
-	 		}
+		function getUrl() {
+			if (!!window.URL) {
+				return window.URL;
+			}
+			if (!!window.webkitURL) {
+				return window.webkitURL;
+			}
 		}
-	
-		function getImg(evt){
-	        var files = evt.target.files;
-	        
-	        for(i=0;i<files.length;i++){
-		        var file = files[i];
-		        console.log(file.name);
-		 			        
-		        var src = URL.createObjectURL(file);
-		 		var img = document.createElement('img');
-		 		
-		 		//img.style.width = "33.3333%";
-		 		img.style.height = "200px";
-		 		img.src = src;
-		 		img.id = file.name;
-		 		img.className = "w3-round w3-third w3-margin";
-		 		 		
-		 		document.getElementById('img_panel').appendChild(img);	        	
-	        }
-	 			 		
-// 	 		ws.send(JSON.stringify({name: file.name,type: file.type}));
-// 	 		ws.send(file);
-	        
-	    };
-	
+
+		function showImg(imgId){
+			// Get the modal
+			var modal = document.getElementById('ImgModal');
+
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById(imgId);
+			var modalImg = document.getElementById("img01");
+			var captionText = document.getElementById("caption");
+			img.onclick = function(){
+			    modal.style.display = "block";
+			    modalImg.src = this.src;
+			    captionText.innerHTML = this.alt;
+			}
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() { 
+			  modal.style.display = "none";
+			}
+		}
+		
+		
+		function getImg(evt) {
+			var files = evt.target.files;
+
+			for (i = 0; i < files.length; i++) {
+				var file = files[i];
+				//console.log(file.name);
+
+				var src = URL.createObjectURL(file);
+				
+				
+				$('#img_panel').append( "<div class='w3-third'>" +
+										"<div class='w3-card'>" +
+										"<a href='" + src +"' target='_blank'>"+
+										"<img src='" + src +"' style='width:100%;height:200px;'></a>"+
+										"<div class='w3-container'>"+
+										"<h5>" + file.name +"<span class='img_remove fa fa-close' style='float:right;'></span></h5>"+
+										"</div></div></div>");
+				
+			
+				//showImg(img.id);
+			}
+
+			// 	 		ws.send(JSON.stringify({name: file.name,type: file.type}));
+			// 	 		ws.send(file);
+
+		};
+
 		function Page_change(PageName, elmnt, color) {
 			var i, pagecontent, pagelinks;
 			pagecontent = document.getElementsByClassName("myPage");

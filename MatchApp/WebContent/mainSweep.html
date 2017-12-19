@@ -14,7 +14,7 @@
 <script src="scripts/jquery.cookie.min.js"></script>
 <script src="scripts/jquery.blockUI.js"></script>
 <script src="scripts/sweep.js?1"></script>
-<title>Sweep</title>
+<title>Clear</title>
 
 <style type="text/css">
 html, body {
@@ -25,6 +25,8 @@ html, body {
 	$(document).ready(function() {
 		checkisLogin();
 		bindListener();
+		var fileList  = document.querySelector('#fileField').files;
+		
 	});
 </script>
 
@@ -34,23 +36,26 @@ html, body {
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
-			<a href="" class="w3-bar-item w3-button w3-hover-red">MatchApp</a>
-			<a class="w3-bar-item">幫助您找到適合的人,清除雜亂,保持簡潔</a>
+			<a href="" class="w3-bar-item w3-button w3-hover-green">Clear</a>
+			<a class="w3-bar-item">找清潔</a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
 			<div class="w3-right w3-mobile">
 
-				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this, 'red')" class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-yellow">首頁</a>
-				<a href="#post" onclick="Page_change('postPage', this, 'red')" class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-yellow">找人打掃</a>
-				<a href="#list" onclick="Page_change('listPage', this, 'red')" class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-yellow">幫忙打掃</a>
-				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-yellow">登入</a>
+				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this, '#2196F3')"
+					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-blue">首頁</a>
+				<a href="#post" onclick="Page_change('postPage', this, '#2196F3')"
+					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-blue">我要找人清潔</a>
+				<a href="#list" onclick="Page_change('listPage', this, '#2196F3')"
+					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-blue">我要幫忙清潔</a>
+				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-light-blue">登入</a>
 				<div class="w3-dropdown-click" id="a_loginOK" style="display: none;">
-					<button class="w3-button w3-white w3-hover-yellow" onclick="menuDropdown()">
+					<button class="w3-button w3-white w3-hover-blue" onclick="menuDropdown()">
 						哈囉&nbsp;<span id=span_user_id></span>&ensp;<span class="fa fa-angle-down"></span>
 					</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" id="menu_user" style="right: 0">
-						<a href="#" class="w3-bar-item w3-button w3-hover-yellow">基本資料</a>
-						<a href="#" class="w3-bar-item w3-button w3-hover-yellow" onclick="loginOut();">登出</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-blue">基本資料</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-blue" onclick="loginOut();">登出</a>
 					</div>
 				</div>
 
@@ -66,7 +71,7 @@ html, body {
 	<div class="myRWD_height"></div>
 	<!-- Page content -->
 
-	<div class="w3-content myPage" style="max-width: 90%;display:none;" id="mainPage">
+	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="mainPage">
 		<h1 class="w3-xxlarge">Keep Clearing</h1>
 		<!-- About Section -->
 		<div class="w3-card-4 w3-container w3-padding-64">
@@ -81,29 +86,37 @@ html, body {
 			</div>
 		</div>
 
-		<hr>		
+		<hr>
 	</div>
-	
-	<div class="w3-content myPage" style="max-width: 90%;display:none;" id="postPage">
-		<h1 class="w3-xxlarge">Post</h1>
+
+	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="postPage">
+		<h1 class="w3-xxlarge">
+			<span class="w3-tag w3-xlarge">P</span> <span class="w3-tag w3-xlarge">O</span> <span
+				class="w3-tag w3-xlarge">S</span> <span class="w3-tag w3-xlarge">T</span>
+		</h1>
 		<!-- About Section -->
-		<div class="w3-card-4 w3-container w3-padding-64">
-			<div class="w3-container w3-red w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
-			</div>
-			<div class="w3-container w3-green w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
-			</div>
-			<div class="w3-container w3-blue w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
+		<div class="w3-card-4 w3-container w3-padding-32">
+			<div class="w3-row-padding">
+				<div class="w3-third">
+					<label>給多少小費?</label>
+					<input class="w3-input w3-border" type="text">
+					<label>請描述需求</label>
+					<textarea class="w3-input w3-border" style="resize: none"></textarea>
+				</div>
+				<div class="w3-twothird">
+					<label>場地照片</label>
+					<input id="fileField" name="files[]" type="file" class="w3-input w3-border w3-round" multiple onchange='getImg(event);'/>
+					<div id="img_panel">
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<hr>
-		
+
 	</div>
-	
-	<div class="w3-content myPage" style="max-width: 90%;display:none;" id="listPage">
+
+	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="listPage">
 		<h1 class="w3-xxlarge">what a list</h1>
 		<!-- About Section -->
 		<div class="w3-card-4 w3-container w3-padding-64">
@@ -119,14 +132,74 @@ html, body {
 		</div>
 
 		<hr>
-		
+
 	</div>
 	<!-- End page content -->
 	<!-- Footer -->
-	<footer class="w3-center w3-light-grey w3-padding-32">
-		<p></p>
+	<footer class="w3-center w3-row-padding w3-light-grey w3-padding-32">
+		<div class="w3-quarter">
+			<p class="w3-large"></p>
+			<!-- 			<span class="fa fa-facebook-square fa-3x"></span> -->
+			<!-- 			<p>我們是?</p> -->
+			<!-- 			<p>服務條款</p> -->
+		</div>
+		<div class="w3-quarter">
+			<p class="w3-large">關於 Clear</p>
+			<p>聯絡我們</p>
+			<p>我們是?</p>
+			<p>服務條款</p>
+		</div>
+
+		<div class="w3-quarter">
+			<p class="w3-large">我是清潔師</p>
+			<p>我們的優勢</p>
+			<p>加入我們</p>
+			<p>服務條款</p>
+		</div>
+
+		<div class="w3-quarter">
+			<p class="w3-large">我要找清潔</p>
+			<p>聯絡我們</p>
+			<p>我們是?</p>
+			<p>服務條款</p>
+		</div>
 	</footer>
 	<script>
+	
+		//var ws = new WebSocket('ws://localhost:8443');
+	 	function getUrl() {
+	 		if(!!window.URL) {
+	 			return window.URL;
+	 		}
+	 		if(!!window.webkitURL) {
+	 			return window.webkitURL;
+	 		}
+		}
+	
+		function getImg(evt){
+	        var files = evt.target.files;
+	        
+	        for(i=0;i<files.length;i++){
+		        var file = files[i];
+		        console.log(file.name);
+		 			        
+		        var src = URL.createObjectURL(file);
+		 		var img = document.createElement('img');
+		 		
+		 		//img.style.width = "33.3333%";
+		 		img.style.height = "200px";
+		 		img.src = src;
+		 		img.id = file.name;
+		 		img.className = "w3-round w3-third w3-margin";
+		 		 		
+		 		document.getElementById('img_panel').appendChild(img);	        	
+	        }
+	 			 		
+// 	 		ws.send(JSON.stringify({name: file.name,type: file.type}));
+// 	 		ws.send(file);
+	        
+	    };
+	
 		function Page_change(PageName, elmnt, color) {
 			var i, pagecontent, pagelinks;
 			pagecontent = document.getElementsByClassName("myPage");
@@ -136,12 +209,14 @@ html, body {
 			pagelinks = document.getElementsByClassName("myPagelink");
 			for (i = 0; i < pagelinks.length; i++) {
 				pagelinks[i].style.backgroundColor = "";
-// 				pagelinks[i].className = pagelinks[i].className.replace(
-// 						" w3-border-red", "");
+				pagelinks[i].style.color = "";
+				// 				pagelinks[i].className = pagelinks[i].className.replace(
+				// 						" w3-border-red", "");
 			}
 			document.getElementById(PageName).style.display = "block";
 			elmnt.style.backgroundColor = color;
-// 			elmnt.className += " w3-border-red";
+			elmnt.style.color = "#fff";
+			// 			elmnt.className += " w3-border-red";
 
 		}
 		// Get the element with id="defaultOpen" and click on it

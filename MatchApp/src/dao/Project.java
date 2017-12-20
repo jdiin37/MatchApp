@@ -3,8 +3,27 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import dto.user_basicObj;
+import dto.location_basicObj;
 
 public class Project {
+	public ArrayList<location_basicObj> GetLocations(Connection connection) throws Exception {
+		ArrayList<location_basicObj> location_basicData = new ArrayList<location_basicObj>();
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT id,location FROM location_basic");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				location_basicObj Object = new location_basicObj();
+				Object.setId(rs.getInt("id"));
+				Object.setLocation(rs.getString("location"));
+				location_basicData.add(Object);
+			}
+			return location_basicData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	
 	public ArrayList<user_basicObj> GetUsers(Connection connection) throws Exception {
 		ArrayList<user_basicObj> user_basicData = new ArrayList<user_basicObj>();
 		try {

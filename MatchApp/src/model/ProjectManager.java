@@ -6,8 +6,23 @@ import java.util.ArrayList;
 import dao.MariaDB;
 import dao.Project;
 import dto.user_basicObj;
+import dto.location_basicObj;
 
 public class ProjectManager {
+	public ArrayList<location_basicObj> GetLocations() throws Exception {
+		ArrayList<location_basicObj> locations = null;
+		try {
+			MariaDB database = new MariaDB();
+			Connection connection = database.Get_Connection();
+			Project project = new Project();
+			locations = project.GetLocations(connection);
+		} catch (Exception e) {
+			throw e;
+		}
+		return locations;
+	}
+	
+	
 	public ArrayList<user_basicObj> GetUsers() throws Exception {
 		ArrayList<user_basicObj> users = null;
 		try {

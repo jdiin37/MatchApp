@@ -12,6 +12,32 @@ function menuDropdown() {
 }
 
 
+//PageInitial
+function PageInitial(page){
+	switch(page) {
+	case "mainPage":
+		break;
+	case "postPage":
+		if(checkisLogin()){
+			$('#btn_post').show();
+			$('#post_status').html("");
+			$.when(ajax_getLocation()).done(function(data){
+				$('#select_location').html("").append('<option value="" disabled selected>請選擇地區</option>');
+				$.each(data,function(index,obj){
+					$('#select_location').append('<option value="'+obj.location+'">' +obj.location +'</option>')
+				});
+			});
+		}else{
+			$('#btn_post').hide();
+			$('#post_status').html("").html("請先登入");
+		}
+		break;	
+	case "findPage":
+		break;	
+	}
+}
+
+
 //Time
 
 var myDay = new Date();
@@ -265,8 +291,10 @@ function iniLoginTab(){
 function checkisLogin(){	
 	if(getCookie("user_id") != ""){
 		iniLoginOK();
+		return true;
 	}else{
 		iniLoginOut();
+		return false;
 	};
 
 }
@@ -287,11 +315,12 @@ function iniLoginOK(){
 function loginOut(){
 	setCookie_user("");
 	iniLoginOut();
+	document.getElementById("defaultOpen").click();
 }
 function iniLoginOut(){
 	$('#span_user_id').html("");
 	$('#a_login').show();
-	$('#a_loginOK').hide();
+	$('#a_loginOK').hide();	
 }
 
 //ajax
@@ -316,6 +345,14 @@ function ajax_reg(){
 	});
 }
 
+function ajax_getLocation(){
+	return $.ajax({
+		type: 'GET',
+		url: "WebAPI/Utility/GetLocation",
+		contentType: 'application/json; charset=UTF-8',
+		dataType: "json"
+	});
+}
 
 //資料驗證區(正規表達式)---------
 number_regex = /^\d+$/;

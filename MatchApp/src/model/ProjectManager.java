@@ -7,6 +7,7 @@ import dao.MariaDB;
 import dao.Project;
 import dto.user_basicObj;
 import dto.location_basicObj;
+import dto.post_basicObj;
 
 public class ProjectManager {
 	public ArrayList<location_basicObj> GetLocations() throws Exception {
@@ -63,4 +64,16 @@ public class ProjectManager {
 		return users;
 	}
 	
+	public post_basicObj CreatePost(post_basicObj postObj) throws Exception {
+		post_basicObj post = null;
+		try {
+			MariaDB database = new MariaDB();
+			Connection connection = database.Get_Connection();
+			Project project = new Project();
+			post = project.CreatePost(connection,postObj);
+		} catch (Exception e) {
+			throw e;
+		}
+		return post;
+	}
 }

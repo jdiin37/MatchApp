@@ -4,12 +4,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import dto.user_basicObj;
 import dto.location_basicObj;
+import dto.post_basicObj;
 
 public class Project {
 	public ArrayList<location_basicObj> GetLocations(Connection connection) throws Exception {
 		ArrayList<location_basicObj> location_basicData = new ArrayList<location_basicObj>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT id,location FROM location_basic");
+			PreparedStatement ps = connection.prepareStatement("SELECT id,location FROM location_basic order by location");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				location_basicObj Object = new location_basicObj();
@@ -85,4 +86,28 @@ public class Project {
 
 	}
 
+	
+	public post_basicObj CreatePost(Connection connection, post_basicObj postObj) throws Exception {
+		try {
+			PreparedStatement ps = connection.prepareStatement(
+					"INSERT INTO post_basic (user_id, location, location_desc,demand_desc,fee,cre_date) VALUES (?, ?, ?, ?, ?, ?)", new String[] { "ID" });
+			ps.setString(1, postObj.getUser_id());
+			ps.setString(2, postObj.getLocation());
+			ps.setString(3, postObj.getLocation_desc());
+			ps.setString(4, postObj.getDemand_desc());
+			ps.setInt(5, postObj.getFee());
+			ps.setString(6, postObj.getCre_date());
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			rs.next();
+			// Update the id in the returned object. This is important as this value must be
+			// returned to the client.
+			int id = rs.getInt(1);
+			postObj.setId(id);
+		} catch (Exception e) {
+			throw e;
+		}
+		return postObj;
+
+	}
 }

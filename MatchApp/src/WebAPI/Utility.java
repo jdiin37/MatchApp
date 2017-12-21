@@ -27,7 +27,7 @@ public class Utility {
 			ProjectManager projectManager = new ProjectManager();
 			locationData = projectManager.GetLocations();
 			Gson gson = new Gson();
-			System.out.println(gson.toJson(locationData));
+			//System.out.println(gson.toJson(locationData));
 			locations = gson.toJson(locationData);
 		}
 

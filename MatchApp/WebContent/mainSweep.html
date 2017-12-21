@@ -118,15 +118,23 @@ html, body {
 						<i class="w3-xxlarge fa fa-location-arrow w3-text-blue"></i>
 					</div>
 					<div class="w3-rest">
-						<select class="w3-select w3-border" name="option" id="select_location">
-						</select>
+						<select id="select_location" class="w3-select w3-border" name="option" >
+						</select>					
 					</div>
+					<div class="w3-row w3-section">
+						<div class="w3-col" style="width: 40px">
+							<i class="w3-xxlarge fa w3-text-blue"></i>
+						</div>
+						<div class="w3-rest">
+							<input id="post_location_desc" class="w3-input w3-border" type="text" placeholder="詳細地址">
+						</div>
+					</div>	
 					<div class="w3-row w3-section">
 						<div class="w3-col" style="width: 40px">
 							<i class="w3-xxlarge fa fa-file-text  w3-text-blue"></i>
 						</div>
 						<div class="w3-rest">
-							<textarea class="w3-input w3-border" rows="6" placeholder="請描述需求" style="resize: none"></textarea>
+							<textarea id="post_demand_desc" class="w3-input w3-border" rows="6" placeholder="請描述需求" style="resize: none"></textarea>
 						</div>
 					</div>
 					<div class="w3-row w3-section">
@@ -134,7 +142,7 @@ html, body {
 							<i class="w3-xxlarge fa fa-dollar w3-text-blue"></i>
 						</div>
 						<div class="w3-rest">
-							<input class="w3-input w3-border" type="text" placeholder="給多少小費?">
+							<input id="post_fee" class="w3-input w3-border" type="text" placeholder="給多少小費?">
 						</div>
 					</div>	
 				</div>
@@ -159,7 +167,10 @@ html, body {
 	</div>
 
 	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="listPage">
-		<h1 class="w3-xxlarge">what a list</h1>
+		<h1 class="w3-xxlarge">
+			<span class="w3-tag w3-xlarge">F</span> <span class="w3-tag w3-xlarge">I</span> <span
+				class="w3-tag w3-xlarge">N</span> <span class="w3-tag w3-xlarge">D</span>
+		</h1>
 		<!-- About Section -->
 		<div class="w3-card-4 w3-container w3-padding-64">
 			<div class="w3-container w3-red w3-cell w3-mobile">

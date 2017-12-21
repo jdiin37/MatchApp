@@ -1,6 +1,9 @@
 var reg_obj = { user_id:"",password:"",email:""};
 
 var login_obj = { user_id:"",password:"",email:""};
+
+var post_obj = { user_id:"",location:"",location_desc:"",demand_desc:"",fee:""};
+
 //dropdown
 function menuDropdown() {
     var x = document.getElementById("menu_user");
@@ -84,7 +87,25 @@ function getCookie(cname) {
     }
     return "";
 }
-
+//post click function
+function clickPost(){
+	post_obj.user_id = getCookie("user_id");
+	post_obj.location = $('#select_location').val();
+	post_obj.location_desc = $('#post_location_desc').val();
+	post_obj.demand_desc = $('#post_demand_desc').val();
+	post_obj.fee = $('#post_fee').val();
+	//alert(JSON.stringify(post_obj));
+	setTimeout(function(){
+		$.when(ajax_CrePost()).done(function(data) {
+			if(data.id == undefined){
+				alert("發佈失敗");
+			}else{
+				alert("發佈成功 編號:" + data.id);
+			}
+		});
+	},1000);
+	
+}
 //login click function
 function clickLogin(){	
 	var aflag = false;
@@ -341,6 +362,16 @@ function ajax_reg(){
 		url: "WebAPI/User/Create",
 		contentType: 'application/json; charset=UTF-8',
 		data:JSON.stringify(reg_obj),
+		dataType: "json"
+	});
+}
+
+function ajax_CrePost(){
+	return $.ajax({
+		type: 'POST',
+		url: "WebAPI/Post/CrePost",
+		contentType: 'application/json; charset=UTF-8',
+		data:JSON.stringify(post_obj),
 		dataType: "json"
 	});
 }

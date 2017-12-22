@@ -113,44 +113,30 @@ html, body {
 		<!-- About Section -->
 		<div class="w3-card-4 w3-container w3-padding-32">
 			<div class="w3-row-padding">
-				<div class="w3-half">					
-					<div class="w3-col" style="width: 40px">
-						<i class="w3-xxlarge fa fa-location-arrow w3-text-blue"></i>
-					</div>
-					<div class="w3-rest">
+				<div class="w3-half ">	
+					<div style="margin-bottom:10px;">
+						<b>請選擇地區</b>
 						<select id="select_location" class="w3-select w3-border" name="option" >
-						</select>					
+						</select>
 					</div>
-					<div class="w3-row w3-section">
-						<div class="w3-col" style="width: 40px">
-							<i class="w3-xxlarge fa w3-text-blue"></i>
-						</div>
-						<div class="w3-rest">
-							<input id="post_location_desc" class="w3-input w3-border" type="text" placeholder="詳細地址">
-						</div>
-					</div>	
-					<div class="w3-row w3-section">
-						<div class="w3-col" style="width: 40px">
-							<i class="w3-xxlarge fa fa-file-text  w3-text-blue"></i>
-						</div>
-						<div class="w3-rest">
-							<textarea id="post_demand_desc" class="w3-input w3-border" rows="6" placeholder="請描述需求" style="resize: none"></textarea>
-						</div>
+					<div style="margin-bottom:10px;">
+						<b>詳細地址</b>&ensp;<span></span>
+						<input id="post_location_desc" class="w3-input w3-border" type="text" >
 					</div>
-					<div class="w3-row w3-section">
-						<div class="w3-col" style="width: 40px">
-							<i class="w3-xxlarge fa fa-dollar w3-text-blue"></i>
-						</div>
-						<div class="w3-rest">
-							<input id="post_fee" class="w3-input w3-border" type="text" placeholder="給多少小費?">
-						</div>
-					</div>	
+					<div style="margin-bottom:10px;">
+						<b>請描述需求</b>&ensp;<span></span>
+						<textarea id="post_demand_desc" class="w3-input w3-border" rows="6"  style="resize: none"></textarea>
+					</div>
+					<div style="margin-bottom:10px;">
+						<b>給多少小費?</b>&ensp;<span></span>
+						<input id="post_fee" class="w3-input w3-border" type="text" ">
+					</div>
 				</div>
 				<div class="w3-half">
-					<div class="w3-border" style="padding-bottom: 16px;">
+					<b>場地照片:</b>&ensp;<span></span>
+					<div style="margin-bottom:10px;padding-bottom:10px;" class="w3-border">
 						<input id="fileField" name="files[]" type="file" class="w3-input" onchange='getImg(event);'
 							accept="image/*" placeholder="場地照片?"/>
-						<div class="w3-padding-small">場地照片:</div>	
 						<div id="img_panel" class="w3-row-padding w3-margin-top"></div>
 					</div>
 				</div>
@@ -189,32 +175,27 @@ html, body {
 	</div>
 	<!-- End page content -->
 	<!-- Footer -->
-	<footer class="w3-center w3-row-padding w3-light-grey w3-padding-32">
-		<div class="w3-quarter">
-			<p class="w3-large"></p>
-			<!-- 			<span class="fa fa-facebook-square fa-3x"></span> -->
-			<!-- 			<p>我們是?</p> -->
-			<!-- 			<p>服務條款</p> -->
-		</div>
-		<div class="w3-quarter">
+	<footer class="w3-center w3-row-padding w3-dark-grey w3-padding-32">
+		
+		<div class="w3-third">
 			<p class="w3-large">關於 Clear</p>
 			<p>聯絡我們</p>
-			<p>我們是?</p>
-			<p>服務條款</p>
-		</div>
-
-		<div class="w3-quarter">
-			<p class="w3-large">我是清潔師</p>
-			<p>我們的優勢</p>
-			<p>加入我們</p>
-			<p>服務條款</p>
-		</div>
-
-		<div class="w3-quarter">
-			<p class="w3-large">我要找清潔</p>
 			<p>聯絡我們</p>
-			<p>我們是?</p>
-			<p>服務條款</p>
+			<p>聯絡我們</p>
+		</div>
+
+		<div class="w3-third">
+			<p class="w3-large">關於 Clear</p>
+			<p>聯絡我們</p>
+			<p>聯絡我們</p>
+			<p>聯絡我們</p>
+		</div>
+
+		<div class="w3-third">
+			<p class="w3-large">關於 Clear</p>
+			<p>聯絡我們</p>
+			<p>聯絡我們</p>
+			<p>聯絡我們</p>
 		</div>
 	</footer>
 	<script>

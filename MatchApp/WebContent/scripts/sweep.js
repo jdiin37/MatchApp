@@ -4,6 +4,8 @@ var login_obj = { user_id:"",password:"",email:""};
 
 var post_obj = { user_id:"",location:"",location_desc:"",demand_desc:"",fee:""};
 
+var postQuery_obj = { rowNumber:10,startId:0,endId:0};
+
 //dropdown
 function menuDropdown() {
     var x = document.getElementById("menu_user");
@@ -35,7 +37,8 @@ function PageInitial(page){
 			$('#post_status').html("").html("請先登入");
 		}
 		break;	
-	case "findPage":
+	case "listPage":
+		clickFindRefresh();
 		break;	
 	}
 }
@@ -111,6 +114,41 @@ function unlock_btn(obj){
 }
 
 
+//find click function
+function clickFindRefresh(element){
+	if( element != undefined){
+		lock_btn(element);		
+	}
+	$.when(ajax_GetPosts()).done(function(data) {	
+		if( element != undefined){
+			unlock_btn(element);		
+		}
+		if(data == undefined){
+			//something wrong!!
+			return false;
+		}
+		if(data.length > 0){
+			var ul = $('#ul_findPost');
+			ul.html("");
+			var li = "";
+			$.each(data,function(index,obj){
+				li = '<li class="w3-bar">' +
+				     '<img src="img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">' +
+				     '<div class="w3-bar-item">' +
+				     '<span class="w3-large">' +obj.location+ '</span><span>'+obj.location_desc +'</span><br>' +
+				     '<span>' + obj.demand_desc +'</span>' +
+				     '</div>'+
+				     '<div class="w3-right w3-bar-item "><br/><span>' + obj.user_id +'</span></div>' +
+				     '</li>';
+				ul.append(li);
+			});
+		}else{
+			//I don't find anything!!
+		}
+	});
+	
+}
+
 //post click function
 function clickPost(element){
 	
@@ -159,7 +197,7 @@ function clickPost(element){
 				window.location.href = "/MatchApp/PostOK.html?postid=" + data.id;
 			}
 		});
-	},500);
+	},1000);
 	
 }
 //login click function
@@ -419,6 +457,16 @@ function ajax_CrePost(){
 		url: "WebAPI/Post/CrePost",
 		contentType: 'application/json; charset=UTF-8',
 		data:JSON.stringify(post_obj),
+		dataType: "json"
+	});
+}
+
+function ajax_GetPosts(){
+	return $.ajax({
+		type: "POST",
+		url: "WebAPI/Post/GetPosts",
+		contentType: 'application/json; charset=UTF-8',
+		data:JSON.stringify(postQuery_obj),
 		dataType: "json"
 	});
 }

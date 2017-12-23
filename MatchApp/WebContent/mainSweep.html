@@ -106,31 +106,32 @@ html, body {
 	</div>
 
 	<div class="w3-content myPage" style="display: none;" id="postPage">
-		<h1 class="w3-xxlarge w3-center">
-			<span class="w3-tag w3-xlarge">P</span> <span class="w3-tag w3-xlarge">O</span> <span
-				class="w3-tag w3-xlarge">S</span> <span class="w3-tag w3-xlarge">T</span>
-		</h1>
+		<div class="w3-row-padding w3-padding-16 w3-center">
+			<span class="w3-tag w3-xlarge">找</span> <span
+				class="w3-tag w3-xlarge">人</span> <span class="w3-tag w3-xlarge">幫</span>
+				<span class="w3-tag w3-xlarge">忙</span> <span class="w3-tag w3-xlarge">吧</span>
+		</div>
 		<!-- About Section -->
 		<div class="w3-card w3-container w3-padding-32 w3-white">
 			<div class="w3-row-padding">	
 					<div style="margin-bottom:10px;">
-						<b>請選擇地區</b>
+						<b>請先選擇地區</b>
 						<select id="select_location" class="w3-select w3-border w3-round-large" name="option" >
 						</select>
 					</div>
 					<div style="margin-bottom:10px;">
-						<b>詳細地址</b>&ensp;<span></span>
+						<b>更明確的地址</b>&ensp;<span></span>
 						<input id="post_location_desc" class="w3-input w3-border w3-round-large" type="text" >
 					</div>
 					<div style="margin-bottom:10px;">
-						<b>請描述需求</b>&ensp;<span></span>
+						<b>說說需求吧</b>&ensp;<span></span>
 						<textarea id="post_demand_desc" class="w3-input w3-border w3-round-large" rows="6"  style="resize: none"></textarea>
 					</div>
 					<div style="margin-bottom:10px;">
 						<b>給多少小費?</b>&ensp;<span></span>
 						<input id="post_fee" class="w3-input w3-border w3-round-large" type="text">
 					</div>
-					<b>場地照片:</b>&ensp;<span></span>
+					<b>附個圖吧</b>&ensp;<span></span>
 					<div style="margin-bottom:10px;padding-bottom:10px;" class="w3-border w3-round-large">
 						<input id="fileField" name="files[]" type="file" class="w3-input" onchange='getImg(event);'
 							accept="image/*" placeholder="場地照片?"/>
@@ -139,7 +140,7 @@ html, body {
 			</div>
 			<hr/>
 			<div class="w3-center">
-				<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost(this);">發佈</button>
+				<button class="w3-button w3-black w3-round-xxlarge" id="btn_post" onclick="clickPost(this);">發佈</button>
 				&ensp;<span id="post_status" style="color: red;"></span>
 			</div>
 		</div>
@@ -149,31 +150,32 @@ html, body {
 	</div>
 
 	<div class="w3-content myPage" style="display: none;" id="listPage">
-		<h1 class="w3-xxlarge w3-center">
-			&ensp;<span class="w3-tag w3-xlarge">F</span> <span class="w3-tag w3-xlarge">I</span> <span
-				class="w3-tag w3-xlarge">N</span> <span class="w3-tag w3-xlarge">D</span>
-		</h1>
+		<div class="w3-row-padding w3-padding-16">
+			<div class="w3-half">
+				&ensp;<span class="w3-tag w3-xlarge">最</span> <span class="w3-tag w3-xlarge">近</span> <span
+				class="w3-tag w3-xlarge">10</span> <span class="w3-tag w3-xlarge">筆</span>
+			</div>
+			<div class="w3-right">
+				<button class="w3-button w3-black w3-round-xxlarge" id="btn_findSearch">Search</button>
+				<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">Refresh</button>
+			</div>	
+		</div>		
 		<!-- About Section -->
 		<ul class="w3-ul w3-card-4 w3-white" id="ul_findPost">
 			<li class="w3-bar">
-		      <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-		      <img src="img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
 		      <div class="w3-bar-item">
-		        <span class="w3-large">Mike</span><br>
-		        <span>Web Designer</span>
+		        <span class="w3-large">找不到資料</span><br>
+		        <span></span>
 		      </div>
 		    </li>
-		
-		    <li class="w3-bar">
-		      <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-		      <img src="img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
-		      <div class="w3-bar-item">
-		        <span class="w3-large">Jill</span><br>
-		        <span>Support</span>
-		      </div>
-		    </li>
+	
 		</ul>
-
+		
+		<div class="w3-center w3-section">
+			<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-left"></i></button>
+			<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-right"></i></button>
+		</div>	
+		
 		<hr>
 
 	</div>
@@ -273,17 +275,10 @@ html, body {
 			}
 			pagelinks = document.getElementsByClassName("myPagelink");
 			for (i = 0; i < pagelinks.length; i++) {
-// 				pagelinks[i].style.backgroundColor = "";
-// 				pagelinks[i].style.color = "";
 				$(pagelinks[i]).removeClass('activeTablink');
-				// 				pagelinks[i].className = pagelinks[i].className.replace(
-				// 						" w3-border-red", "");
 			}
 			document.getElementById(PageName).style.display = "block";
-// 			elmnt.style.backgroundColor = color;
-// 			elmnt.style.color = "#fff";
 			$(elmnt).addClass('activeTablink');
-			// 			elmnt.className += " w3-border-red";
 			PageInitial(PageName);			
 		}
 		// Get the element with id="defaultOpen" and click on it

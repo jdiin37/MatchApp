@@ -8,6 +8,7 @@ import dao.Project;
 import dto.user_basicObj;
 import dto.location_basicObj;
 import dto.post_basicObj;
+import dto.js_postQueryObj;
 
 public class ProjectManager {
 	public ArrayList<location_basicObj> GetLocations() throws Exception {
@@ -75,5 +76,18 @@ public class ProjectManager {
 			throw e;
 		}
 		return post;
+	}
+	
+	public ArrayList<post_basicObj> GetPosts(js_postQueryObj queryObj) throws Exception {
+		ArrayList<post_basicObj> posts = null;
+		try {
+			MariaDB database = new MariaDB();
+			Connection connection = database.Get_Connection();
+			Project project = new Project();
+			posts = project.GetPosts(connection,queryObj);
+		} catch (Exception e) {
+			throw e;
+		}
+		return posts;
 	}
 }

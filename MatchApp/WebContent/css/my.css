@@ -6,21 +6,15 @@
 	height:60px;	
 }
 
-@media (max-width: 910px){
+@media (max-width: 600px){
 	.myRWD_height{
 		height:100px;
 	}
 }
 
-@media (max-width: 560px){
+@media (max-width: 520px){
 	.myRWD_height{
 		height:150px;
-	}
-}
-
-@media (max-width: 420px){
-	.myRWD_height{
-		height:200px;
 	}
 }
 
@@ -49,3 +43,6 @@ input:focus, textarea:focus, select:focus {
     background-color:#f5f5f5;
 }
 
+b{
+	font-size: 16px!important;
+}

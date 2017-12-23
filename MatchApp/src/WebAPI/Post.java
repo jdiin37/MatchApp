@@ -12,53 +12,12 @@ import javax.ws.rs.core.MediaType;
 
 import model.ProjectManager;
 import com.google.gson.Gson;
-import dto.post_basicObj;;
+import dto.post_basicObj;
+import dto.user_basicObj;
+import dto.js_postQueryObj;
 
 @Path("/Post")
 public class Post {
-
-//	@GET
-//	@Path("/GetPost")
-//	@Produces("application/json")
-//	public String getPost() {
-//		String users = null;
-//		try {
-//			ArrayList<user_basicObj> userData = null;
-//			ProjectManager projectManager = new ProjectManager();
-//			userData = projectManager.GetUsers();
-//			Gson gson = new Gson();
-//			System.out.println(gson.toJson(userData));
-//			users = gson.toJson(userData);
-//		}
-//
-//		catch (Exception e) {
-//			System.out.println("Exception Error"); // Console
-//		}
-//		return users;
-//	}
-	
-//	@POST 
-//	@Consumes({ MediaType.APPLICATION_JSON})
-//	@Produces({MediaType.APPLICATION_JSON})
-//	@Path("/Login")
-//	public String Login(user_basicObj cre_user) {
-//		String users = null;
-//
-//		try {
-//			//user_basicObj newUser = new Gson().fromJson(cre_user, user_basicObj.class);
-//			user_basicObj newUser = cre_user;
-//			ProjectManager projectManager = new ProjectManager();
-//			newUser = projectManager.IsUser(newUser);
-//			Gson gson = new Gson();
-//			System.out.println(gson.toJson(newUser));
-//			users = gson.toJson(newUser);
-//		}
-//
-//		catch (Exception e) {
-//			System.out.println("Exception Error"); // Console
-//		}
-//		return users;
-//	}
 	
 	@POST 
 	@Consumes({ MediaType.APPLICATION_JSON})
@@ -68,7 +27,6 @@ public class Post {
 		String post = null;
 
 		try {
-			//user_basicObj newUser = new Gson().fromJson(cre_user, user_basicObj.class);
 			post_basicObj newPost = cre_post;
 			ProjectManager projectManager = new ProjectManager();
 			newPost = projectManager.CreatePost(newPost);
@@ -81,6 +39,28 @@ public class Post {
 			System.out.println("Exception Error"); // Console
 		}
 		return post;
+	}
+	
+	@POST 
+	@Consumes({ MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/GetPosts")
+	public String Get(js_postQueryObj queryObj) {
+		String posts = null;
+
+		try {
+			ArrayList<post_basicObj> postList = null;
+			ProjectManager projectManager = new ProjectManager();
+			postList = projectManager.GetPosts(queryObj);
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(postList));
+			posts = gson.toJson(postList);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return posts;
 	}
 
 }

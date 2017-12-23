@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dto.user_basicObj;
 import dto.location_basicObj;
 import dto.post_basicObj;
+import dto.js_postQueryObj;
 
 public class Project {
 	public ArrayList<location_basicObj> GetLocations(Connection connection) throws Exception {
@@ -109,5 +110,30 @@ public class Project {
 		}
 		return postObj;
 
+	}
+	
+	public ArrayList<post_basicObj> GetPosts(Connection connection,js_postQueryObj queryObj) throws Exception {
+		ArrayList<post_basicObj> postList = new ArrayList<post_basicObj>();
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT id,user_id,location,location_desc,demand_desc,fee,cre_date,mod_date FROM post_basic order by id desc LIMIT ? ");
+			ps.setInt(1, queryObj.getRowNumber());
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				post_basicObj Object = new post_basicObj();
+				Object.setId(rs.getInt("id"));
+				Object.setUser_id(rs.getString("user_id"));
+				Object.setLocation(rs.getString("location"));
+				Object.setLocation_desc(rs.getString("location_desc"));
+				Object.setDemand_desc(rs.getString("demand_desc"));
+				Object.setFee(rs.getInt("fee"));
+				Object.setCre_date(rs.getString("cre_date"));
+				Object.setMod_date(rs.getString("mod_date"));
+				postList.add(Object);
+			}
+			return postList;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/w3c.css">
+<link rel="stylesheet" href="css/model.css">
+<link rel="stylesheet" href="css/tab.css?3">
+<link rel="stylesheet" href="css/my.css">
+
+<script src="scripts/jquery-1.11.1.min.js"></script>
+<script src="scripts/jquery.cookie.min.js"></script>
+<script src="scripts/jquery.blockUI.js"></script>
+<script src="scripts/sweep.js?2"></script>
+<title>Sweep_Login</title>
+
+<style type="text/css">
+html, body {
+	font-family: 微軟正黑體, Verdana, sans-serif !important;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var postid = getQueryVariable('postid');
+		$('#post_id').html(postid);
+		setTimeout(function(){
+			window.location.href = "/MatchApp";				
+		},3500);		
+	});
+</script>
+
+</head>
+<body>
+
+	<!-- Navbar (sit on top) -->
+	<div class="w3-top">
+		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
+			<a href="/MatchApp" class="w3-bar-item w3-button w3-hover-green">Clear</a>
+			<!-- Right-sided navbar links. Hide them on small screens -->			
+		</div>
+
+	</div>
+
+	<!-- Header -->
+
+	<!-- The Modal -->
+	<div id="login_Modal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			
+		</div>
+
+	</div>
+
+
+	<div style='height: 100px'></div>
+	<div class="w3-container container">
+		<div class="tab_green">
+			<div class="w3-container w3-green w3-center">
+				<h2>發布成功</h2>
+			</div>
+			<br />
+			<div class="w3-container w3-text-green w3-center">
+				<div class="w3-padding-16">
+					<b>編號:<span id="post_id"></span></b>
+				</div>
+				<div class="w3-padding-16">
+					<b>
+					3秒後自動返回首頁或&ensp;<a href="/MatchApp" class="w3-bar-item w3-hover-green">點此返回</a>
+					</b>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+
+</body>
+</html>

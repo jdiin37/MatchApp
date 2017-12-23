@@ -10,13 +10,23 @@
 }
 
 .tablink_login:hover {
-    background-color: rgba(0,0,0,0.2);;
+    background-color: rgba(0,0,0,0.2);
 }
 
 #tabLogin {background-color:white;border: 1px solid #2196F3;padding-bottom:20px;}
 #tabReg {background-color:white;border: 1px solid #009688;padding-bottom:20px;}
 #tabForget {background-color:white;border: 1px solid #ff9800;padding-bottom:20px;}
+.tab_green {background-color:white;border: 1px solid #009688;padding-bottom:20px;}
 
+.activeTablink{
+	background-color:#2196F3 !important;
+	color:#fff !important;
+}
+
+.activeTablink:hover{
+	background-color:#2196F3 !important;
+	color:#fff !important;
+}
 
 .w3-container label{
 	text-align:left;

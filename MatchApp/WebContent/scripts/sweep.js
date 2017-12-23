@@ -40,6 +40,18 @@ function PageInitial(page){
 	}
 }
 
+/**取得 URL後面的參數***/
+var getQueryVariable = function(variable) {
+	 var query = window.location.search.substring(1);
+	 var vars = query.split("&");
+	 for (var i = 0; i < vars.length; i++) {
+	  var pair = vars[i].split("=");
+	  if (pair[0] == variable) {
+	   return pair[1];
+	  }
+	 }
+	 return (false);
+	}
 
 //Time
 
@@ -87,72 +99,108 @@ function getCookie(cname) {
     }
     return "";
 }
+//lock btn
+function lock_btn(obj){
+	$(obj).prop('disabled', true);
+	$(obj).css('cursor','wait');
+}
+
+function unlock_btn(obj){
+	$(obj).prop('disabled', false);
+	$(obj).css('cursor','');
+}
+
+
 //post click function
-function clickPost(){
+function clickPost(element){
+	
 	post_obj.user_id = getCookie("user_id");
 	post_obj.location = $('#select_location').val();
-	post_obj.location_desc = $('#post_location_desc').val();
-	post_obj.demand_desc = $('#post_demand_desc').val();
-	post_obj.fee = $('#post_fee').val();
+	
+	if ($('#post_location_desc').val().length > 0 && $('#post_location_desc').val().length < 60) {		
+		stateChange(true, '#post_location_desc');
+		post_obj.location_desc = $('#post_location_desc').val();
+	} else if($('#post_location_desc').val().length >= 60){
+		stateChange(false, '#post_location_desc', "請勿超過60字");		
+		return false;
+	} else {
+		stateChange(false, '#post_location_desc', "請輸入地址");		
+		return false;
+	}	
+	
+	
+	if ($('#post_demand_desc').val().length > 0 && $('#post_demand_desc').val().length < 200) {		
+		stateChange(true, '#post_demand_desc');
+		post_obj.demand_desc = $('#post_demand_desc').val();
+	} else if($('#post_demand_desc').val().length >= 200){
+		stateChange(false, '#post_demand_desc', "請勿超過200字");		
+		return false;
+	} else {
+		stateChange(false, '#post_demand_desc', "請輸入需求描述");		
+		return false;
+	}
+	
+	if ($('#post_fee').val().length > 0 && number_regex.test($('#post_fee').val())) {		
+		stateChange(true, '#post_fee');
+		post_obj.fee = $('#post_fee').val();
+	} else {
+		stateChange(false, '#post_fee', "請輸入數字");		
+		return false;
+	}
+	
+	lock_btn(element);
 	//alert(JSON.stringify(post_obj));
 	setTimeout(function(){
-		$.when(ajax_CrePost()).done(function(data) {
+		$.when(ajax_CrePost()).done(function(data) {		
+			unlock_btn(element);
 			if(data.id == undefined){
-				alert("發佈失敗");
+				alert("發佈失敗,請稍後在試");
 			}else{
-				alert("發佈成功 編號:" + data.id);
+				window.location.href = "/MatchApp/PostOK.html?postid=" + data.id;
 			}
 		});
-	},1000);
+	},500);
 	
 }
 //login click function
-function clickLogin(){	
-	var aflag = false;
-	var bflag = false
-	
+function clickLogin(element){	
 	if ($('#login_id').val().length > 0 && engnum_regex.test($('#login_id').val())) {		
 		stateChange(true, '#login_id');
 		login_obj.user_id = $('#login_id').val();
-		aflag = true;
 	} else {
 		stateChange(false, '#login_id', "請輸入英文或數字");
-		aflag = false
+		return false;
 	}
 	
 	if ($('#login_pw').val().length > 0 && engnum_regex.test($('#login_pw').val())) {		
 		stateChange(true, '#login_pw');
 		login_obj.password = $('#login_pw').val();
-		bflag = true;
 	} else {
 		stateChange(false, '#login_pw', "請輸入英文或數字");
-		bflag = false
+		return false;
 	}		
 	
-	if(aflag && bflag){
-		$.when(ajax_login()).done(function(data) {
-			if(data.user_id == undefined){
-				$('#login_status').html("帳號密碼有誤");
-			}else{
-				login_obj = data;
-				loginOK();
-			}
-		});			
-	}
+	lock_btn(element);
+	$.when(ajax_login()).done(function(data) {
+		unlock_btn(element);
+		if(data.user_id == undefined){
+			$('#login_status').html("帳號密碼有誤");
+		}else{
+			login_obj = data;
+			loginOK();
+		}
+	});			
+	
 };
 
-function clickReg(){	
-	var aflag = false;
-	var bflag = false;
-	var cflag = false;
+function clickReg(element){	
 	
 	if ($('#reg_id').val().length > 4 && engnum_regex.test($('#reg_id').val())) {		
 		stateChange(true, '#reg_id');
 		reg_obj.user_id = $('#reg_id').val();
-		aflag = true;
 	} else {
 		stateChange(false, '#reg_id', "請輸入英文或數字,且長度至少四碼");
-		aflag = false
+		return false;
 	}
 	
 	if ($('#reg_pw').val().length > 4 && engnum_regex.test($('#reg_pw').val())) {		
@@ -160,40 +208,39 @@ function clickReg(){
 
 	} else {
 		stateChange(false, '#reg_pw', "請輸入英文或數字,且長度至少四碼");
+		return false;
 	}
 	
 	if ($('#reg_pw_re').val().length > 0 && $('#reg_pw_re').val() == $('#reg_pw').val()) {		
 		stateChange(true, '#reg_pw_re');
 		reg_obj.password = $('#reg_pw').val();
-		bflag = true;
 	} else {
 		stateChange(false, '#reg_pw_re', "請輸入相同的密碼");
-		bflag = false
+		return false;
 	}
 	
 	if ($('#reg_email').val().length > 0 && email_regex.test($('#reg_email').val())) {		
 		stateChange(true, '#reg_email');
 		reg_obj.email = $('#reg_email').val();
-		cflag = true;
 	} else {
 		stateChange(false, '#reg_email', "請輸入正確的email格式");
-		cflag = false
+		return false;
 	}
 	
+	lock_btn(element);
+	$.when(ajax_reg()).done(function(data) {
+		unlock_btn(element);
+		if(data.user_id == undefined){
+			$('#reg_status').html("此帳號已有人使用");
+		}else{
+			$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');
+			stateChange(true, '#reg_id',"","");
+			stateChange(true, '#reg_pw',"","");
+			stateChange(true, '#reg_pw_re',"","");
+			stateChange(true, '#reg_email',"","");
+		}
+	});			
 	
-	if(aflag && bflag && cflag){
-		$.when(ajax_reg()).done(function(data) {
-			if(data.user_id == undefined){
-				$('#reg_status').html("此帳號已有人使用");
-			}else{
-				$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');
-				stateChange(true, '#reg_id',"","");
-				stateChange(true, '#reg_pw',"","");
-				stateChange(true, '#reg_pw_re',"","");
-				stateChange(true, '#reg_email',"","");
-			}
-		});			
-	}		
 }
 
 
@@ -336,7 +383,7 @@ function iniLoginOK(){
 function loginOut(){
 	setCookie_user("");
 	iniLoginOut();
-	document.getElementById("defaultOpen").click();
+	window.location.href = "/MatchApp";
 }
 function iniLoginOut(){
 	$('#span_user_id').html("");
@@ -393,7 +440,7 @@ email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\
 function stateChange(state, objID, msg,inival) {
 	if (state) {
 		// $(objID).parent().removeClass('has-error').addClass('has-success');
-		$(objID).removeClass('w3-border w3-border-red');
+		$(objID).removeClass('w3-border-red');
 		$(objID).prev('span').html("");
 		if(inival != undefined){
 			$(objID).val(inival);

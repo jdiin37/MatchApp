@@ -80,14 +80,16 @@ html, body {
 					<b>密碼</b>
 				</label>
 				&ensp;<span></span> <input class="w3-input" type="password" id="login_pw"> <br />
+				<div class="w3-center w3-padding">
+					<span id="login_status" style="color: red;"></span>
+				</div>
 				<div class="w3-center">
 					<button class="w3-btn w3-blue" id="btn_login" onclick="clickLogin();">登入</button>
-					&ensp;<span id="login_status" style="color: red;"></span>
 				</div>
 			</div>
 		</div>
 
-		<div id="tabReg" class="tabcontent_login">
+		<div id="tabReg" class="tabcontent_login" style="display: none;">
 			<div class="w3-container w3-teal w3-center">
 				<h2>會員註冊</h2>
 			</div>
@@ -110,13 +112,16 @@ html, body {
 				</label>
 				&ensp;<span></span> <input class="w3-input" type="text" id="reg_email"> <br />
 				<div class="w3-center">
-					<button class="w3-btn w3-teal" id="btn_reg" onclick="clickReg();">註冊</button>
-					&ensp;<span id="reg_status" style="color: red;"></span>
+					<button class="w3-btn w3-teal" id="btn_reg" onclick="clickReg();">註冊</button>				
+				</div>
+				<div class="w3-center">
+					<br/>
+					<span id="reg_status" style="color: red;"></span>
 				</div>
 			</div>
 		</div>
 		
-		<div id="tabForget" class="tabcontent_login">
+		<div id="tabForget" class="tabcontent_login" style="display: none;">
 			<div class="w3-container w3-orange w3-center">
 				<h2>忘記密碼?</h2>
 			</div>
@@ -128,8 +133,11 @@ html, body {
 				&ensp;<span></span> <input class="w3-input" type="text" id="forget_email"> <br />
 				
 				<div class="w3-center">
-					<button class="w3-btn w3-orange" id="btn_Forget" onclick="clickForget();">確認</button>
-					&ensp;<span id="forget_status" style="color: red;"></span>
+					
+					<span id="forget_status" style="color: red;"></span>
+				</div>
+				<div class="w3-center">
+					<button class="w3-btn w3-orange" id="btn_Forget" onclick="clickForget();">確認</button>				
 				</div>
 			</div>
 		</div>
@@ -141,7 +149,7 @@ html, body {
 	<div class="w3-content" style="max-width: 1100px"></div>
 
 	<!-- Footer -->
-	<footer class="w3-center w3-row-padding w3-dark-grey w3-padding-32">
+	<footer class="w3-center w3-row-padding w3-padding-32 mainfooter">
 		
 		<div class="w3-third">
 			<p class="w3-large">關於 Clear</p>

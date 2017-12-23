@@ -53,25 +53,25 @@ html, body {
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
 			<a href="" class="w3-bar-item w3-button w3-hover-green">Clear</a>
-			<a class="w3-bar-item">找清潔</a>
+			<a class="w3-bar-item"></a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
 			<div class="w3-right w3-mobile">
 
-				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this, '#2196F3')"
-					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-blue">首頁</a>
-				<a href="#post" onclick="Page_change('postPage', this, '#2196F3')"
-					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-blue">我要找人清潔</a>
-				<a href="#list" onclick="Page_change('listPage', this, '#2196F3')"
-					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-blue">我要幫忙清潔</a>
-				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-light-blue">登入</a>
+				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this)"
+					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-gray">首頁</a>
+				<a href="#post" onclick="Page_change('postPage', this)"
+					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-gray">我要找人清潔</a>
+				<a href="#list" onclick="Page_change('listPage', this)"
+					class="myPagelink w3-bar-item w3-button w3-border-right w3-hover-light-gray">我要幫忙清潔</a>
+				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-light-gray">登入</a>
 				<div class="w3-dropdown-click" id="a_loginOK" style="display: none;">
-					<button class="w3-button w3-white w3-hover-blue" onclick="menuDropdown()">
+					<button class="w3-button w3-white w3-hover-light-gray" onclick="menuDropdown()">
 						哈囉&nbsp;<span id=span_user_id></span>&ensp;<span class="fa fa-angle-down"></span>
 					</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" id="menu_user" style="right: 0">
-						<a href="#" class="w3-bar-item w3-button w3-hover-blue">基本資料</a>
-						<a href="#" class="w3-bar-item w3-button w3-hover-blue" onclick="loginOut();">登出</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-light-gray">基本資料</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-light-gray" onclick="loginOut();">登出</a>
 					</div>
 				</div>
 
@@ -87,63 +87,59 @@ html, body {
 	<div class="myRWD_height"></div>
 	<!-- Page content -->
 
-	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="mainPage">
+	<div class="w3-content myPage" id="mainPage">
 		<h1 class="w3-xxlarge">Keep Clearing</h1>
 		<!-- About Section -->
-		<div class="w3-card-4 w3-container w3-padding-64">
+		<div class="w3-card w3-container w3-padding-64 w3-white">
 			<div class="w3-container w3-red w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
+				<p>發佈</p>
 			</div>
 			<div class="w3-container w3-green w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
+				<p>清潔</p>
 			</div>
 			<div class="w3-container w3-blue w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
+				<p>簡單</p>
 			</div>
 		</div>
 
 		<hr>
 	</div>
 
-	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="postPage">
-		<h1 class="w3-xxlarge">
+	<div class="w3-content myPage" style="display: none;" id="postPage">
+		<h1 class="w3-xxlarge w3-center">
 			<span class="w3-tag w3-xlarge">P</span> <span class="w3-tag w3-xlarge">O</span> <span
 				class="w3-tag w3-xlarge">S</span> <span class="w3-tag w3-xlarge">T</span>
 		</h1>
 		<!-- About Section -->
-		<div class="w3-card-4 w3-container w3-padding-32">
-			<div class="w3-row-padding">
-				<div class="w3-half ">	
+		<div class="w3-card w3-container w3-padding-32 w3-white">
+			<div class="w3-row-padding">	
 					<div style="margin-bottom:10px;">
 						<b>請選擇地區</b>
-						<select id="select_location" class="w3-select w3-border" name="option" >
+						<select id="select_location" class="w3-select w3-border w3-round-large" name="option" >
 						</select>
 					</div>
 					<div style="margin-bottom:10px;">
 						<b>詳細地址</b>&ensp;<span></span>
-						<input id="post_location_desc" class="w3-input w3-border" type="text" >
+						<input id="post_location_desc" class="w3-input w3-border w3-round-large" type="text" >
 					</div>
 					<div style="margin-bottom:10px;">
 						<b>請描述需求</b>&ensp;<span></span>
-						<textarea id="post_demand_desc" class="w3-input w3-border" rows="6"  style="resize: none"></textarea>
+						<textarea id="post_demand_desc" class="w3-input w3-border w3-round-large" rows="6"  style="resize: none"></textarea>
 					</div>
 					<div style="margin-bottom:10px;">
 						<b>給多少小費?</b>&ensp;<span></span>
-						<input id="post_fee" class="w3-input w3-border" type="text" ">
+						<input id="post_fee" class="w3-input w3-border w3-round-large" type="text">
 					</div>
-				</div>
-				<div class="w3-half">
 					<b>場地照片:</b>&ensp;<span></span>
-					<div style="margin-bottom:10px;padding-bottom:10px;" class="w3-border">
+					<div style="margin-bottom:10px;padding-bottom:10px;" class="w3-border w3-round-large">
 						<input id="fileField" name="files[]" type="file" class="w3-input" onchange='getImg(event);'
 							accept="image/*" placeholder="場地照片?"/>
 						<div id="img_panel" class="w3-row-padding w3-margin-top"></div>
 					</div>
-				</div>
 			</div>
 			<hr/>
 			<div class="w3-center">
-				<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost();">發佈</button>
+				<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost(this);">發佈</button>
 				&ensp;<span id="post_status" style="color: red;"></span>
 			</div>
 		</div>
@@ -152,30 +148,38 @@ html, body {
 
 	</div>
 
-	<div class="w3-content myPage" style="max-width: 90%; display: none;" id="listPage">
-		<h1 class="w3-xxlarge">
-			<span class="w3-tag w3-xlarge">F</span> <span class="w3-tag w3-xlarge">I</span> <span
+	<div class="w3-content myPage" style="display: none;" id="listPage">
+		<h1 class="w3-xxlarge w3-center">
+			&ensp;<span class="w3-tag w3-xlarge">F</span> <span class="w3-tag w3-xlarge">I</span> <span
 				class="w3-tag w3-xlarge">N</span> <span class="w3-tag w3-xlarge">D</span>
 		</h1>
 		<!-- About Section -->
-		<div class="w3-card-4 w3-container w3-padding-64">
-			<div class="w3-container w3-red w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
-			</div>
-			<div class="w3-container w3-green w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
-			</div>
-			<div class="w3-container w3-blue w3-cell w3-mobile">
-				<p>Hello W3.CSS Layout.</p>
-			</div>
-		</div>
+		<ul class="w3-ul w3-card-4 w3-white" id="ul_findPost">
+			<li class="w3-bar">
+		      <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+		      <img src="img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+		      <div class="w3-bar-item">
+		        <span class="w3-large">Mike</span><br>
+		        <span>Web Designer</span>
+		      </div>
+		    </li>
+		
+		    <li class="w3-bar">
+		      <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+		      <img src="img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+		      <div class="w3-bar-item">
+		        <span class="w3-large">Jill</span><br>
+		        <span>Support</span>
+		      </div>
+		    </li>
+		</ul>
 
 		<hr>
 
 	</div>
 	<!-- End page content -->
 	<!-- Footer -->
-	<footer class="w3-center w3-row-padding w3-dark-grey w3-padding-32">
+	<footer class="w3-center w3-row-padding w3-padding-32 mainfooter">
 		
 		<div class="w3-third">
 			<p class="w3-large">關於 Clear</p>
@@ -269,14 +273,16 @@ html, body {
 			}
 			pagelinks = document.getElementsByClassName("myPagelink");
 			for (i = 0; i < pagelinks.length; i++) {
-				pagelinks[i].style.backgroundColor = "";
-				pagelinks[i].style.color = "";
+// 				pagelinks[i].style.backgroundColor = "";
+// 				pagelinks[i].style.color = "";
+				$(pagelinks[i]).removeClass('activeTablink');
 				// 				pagelinks[i].className = pagelinks[i].className.replace(
 				// 						" w3-border-red", "");
 			}
 			document.getElementById(PageName).style.display = "block";
-			elmnt.style.backgroundColor = color;
-			elmnt.style.color = "#fff";
+// 			elmnt.style.backgroundColor = color;
+// 			elmnt.style.color = "#fff";
+			$(elmnt).addClass('activeTablink');
 			// 			elmnt.className += " w3-border-red";
 			PageInitial(PageName);			
 		}

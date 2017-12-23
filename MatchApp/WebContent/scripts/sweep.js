@@ -133,7 +133,7 @@ function clickFindRefresh(element){
 			var li = "";
 			$.each(data,function(index,obj){
 				li = '<li class="w3-bar">' +
-				     '<img src="img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">' +
+				     '<img src="" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">' +
 				     '<div class="w3-bar-item">' +
 				     '<span class="w3-large">' +obj.location+ '</span><span>'+obj.location_desc +'</span><br>' +
 				     '<span>' + obj.demand_desc +'</span>' +

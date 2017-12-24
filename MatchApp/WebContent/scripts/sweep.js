@@ -17,6 +17,22 @@ function menuDropdown() {
 }
 
 
+//block UI
+function setBlock(second){	
+	$.blockUI({ message: '<span class="w3-xxlarge">資料讀取中</span>',css: {
+        border: 'none',
+        padding: '15px',
+        backgroundColor: '#000',
+        '-webkit-border-radius': '10px',
+        '-moz-border-radius': '10px',
+        opacity: .5,
+        color: '#fff'
+    } });
+	setTimeout(function(){
+		$.unblockUI();
+	}, second)		
+}
+
 //PageInitial
 function PageInitial(page){
 	switch(page) {
@@ -37,7 +53,7 @@ function PageInitial(page){
 			$('#post_status').html("").html("請先登入");
 		}
 		break;	
-	case "listPage":
+	case "listPage":		
 		clickFindRefresh();
 		break;	
 	}
@@ -116,6 +132,7 @@ function unlock_btn(obj){
 
 //find click function
 function clickFindRefresh(element){
+	setBlock(500);
 	if( element != undefined){
 		lock_btn(element);		
 	}

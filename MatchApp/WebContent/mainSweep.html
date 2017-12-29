@@ -52,7 +52,7 @@ html, body {
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
-			<a href="" class="w3-bar-item w3-button w3-hover-green">Clear</a>
+			<a href="" class="w3-bar-item w3-button w3-hover-green w3-round">Clear</a>
 			<a class="w3-bar-item"></a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
@@ -86,7 +86,7 @@ html, body {
 	<!-- 	</div> -->
 	<div class="myRWD_height"></div>
 	<!-- Page content -->
-
+	<div class="container">
 	<div class="w3-content myPage" id="mainPage">
 		<h1 class="w3-xxlarge">Keep Clearing</h1>
 		<!-- About Section -->
@@ -105,14 +105,12 @@ html, body {
 		<hr>
 	</div>
 
-	<div class="w3-content myPage" style="display: none;" id="postPage">
-		<div class="w3-row-padding w3-padding-16 w3-center">
-			<span class="w3-tag w3-xlarge">找</span> <span
-				class="w3-tag w3-xlarge">人</span> <span class="w3-tag w3-xlarge">幫</span>
-				<span class="w3-tag w3-xlarge">忙</span> <span class="w3-tag w3-xlarge">吧</span>
+	<div class="w3-content myPage w3-margin-top" style="display: none;margin-bottom:32px!important" id="postPage">	
+		<div class="w3-container w3-blue w3-center tab_header">
+			<h2>找人幫忙清潔</h2>
 		</div>
-		<!-- About Section -->
-		<div class="w3-card w3-container w3-padding-32 w3-white">
+		<br />
+		<div class="w3-container">
 			<div class="w3-row-padding">	
 					<div style="margin-bottom:10px;">
 						<b>請先選擇地區</b>
@@ -138,15 +136,11 @@ html, body {
 						<div id="img_panel" class="w3-row-padding w3-margin-top"></div>
 					</div>
 			</div>
-			<hr/>
 			<div class="w3-center">
-				<button class="w3-button w3-black w3-round-xxlarge" id="btn_post" onclick="clickPost(this);">發佈</button>
+				<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost(this);">發佈</button>
 				&ensp;<span id="post_status" style="color: red;"></span>
 			</div>
 		</div>
-
-		<hr>
-
 	</div>
 
 	<div class="w3-content myPage" style="display: none;" id="listPage">
@@ -178,6 +172,7 @@ html, body {
 		
 		<hr>
 
+	</div>
 	</div>
 	<!-- End page content -->
 	<!-- Footer -->

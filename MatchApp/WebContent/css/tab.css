@@ -13,7 +13,7 @@
     background-color: rgba(0,0,0,0.2);
 }
 
-#tabLogin {background-color:white;border: 1px solid #2196F3;padding-bottom:20px; border-radius: 10px;}
+#tabLogin,#postPage {background-color:white;border: 1px solid #2196F3;padding-bottom:20px; border-radius: 10px;}
 #tabReg {background-color:white;border: 1px solid #009688;padding-bottom:20px;border-radius: 10px;}
 #tabForget {background-color:white;border: 1px solid #ff9800;padding-bottom:20px;border-radius: 10px;}
 .tab_green {background-color:white;border: 1px solid #009688;padding-bottom:20px;border-radius: 10px;}

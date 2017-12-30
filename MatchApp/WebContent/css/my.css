@@ -1,3 +1,10 @@
+html, body {
+	font-family: Verdana,Microsoft YaHei, sans-serif !important;
+}
+h1,h2,h3,h4,h5,h6{
+	font-family: Verdana,Microsoft YaHei, sans-serif !important;
+}
+
 #menu_user{
 	right:0;
 }
@@ -6,15 +13,25 @@
 	height:60px;	
 }
 
+.RWD_marginTop{
+	margin-top:60px;
+}
+
 @media (max-width: 600px){
 	.myRWD_height{
 		height:100px;
+	}
+	.RWD_marginTop{
+		margin-top:100px;
 	}
 }
 
 @media (max-width: 520px){
 	.myRWD_height{
 		height:150px;
+	}
+	.RWD_marginTop{
+		margin-top:150px;
 	}
 }
 
@@ -56,4 +73,22 @@ b{
 .w3-dropdown-content{
 	padding:10px;
 	border-radius: 10px;
+}
+
+.w3-hover-white:hover{
+	color:rgba(0,0,0,.66) !important;
+}
+
+.activeTablink{
+	border-bottom:6px solid #2196F3 !important;
+	color:#2196F3 !important;
+}
+
+.activeTablink:hover{
+	border-bottom:6px solid #2196F3 !important;
+	color:#2196F3 !important;
+}
+
+#topBar{
+	padding-top:8px;
 }

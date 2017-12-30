@@ -37,8 +37,18 @@ function setBlock(second){
 function PageInitial(page){
 	switch(page) {
 	case "mainPage":
+		
+		$('#mainInfo1,#mainInfo2,#mainInfo3').hide();
+		
+		$('#mainInfo1').fadeIn("slow",function(){
+			$('#mainInfo2').fadeIn("slow",function(){
+				$('#mainInfo3').fadeIn("slow");				
+			});			
+		});
 		break;
 	case "postPage":
+		$("#postPage").hide();
+		$("#postPage").slideDown("slow");
 		if(checkisLogin()){
 			$('#btn_post').show();
 			$('#post_status').html("");

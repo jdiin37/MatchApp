@@ -13,14 +13,10 @@
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/jquery.cookie.min.js"></script>
 <script src="scripts/jquery.blockUI.js"></script>
+<script src="scripts/utility.js?1"></script>
 <script src="scripts/sweep.js?1"></script>
-<title>Clear</title>
+<title>Dasao</title>
 
-<style type="text/css">
-html, body {
-	font-family: 微軟正黑體, Verdana, sans-serif !important;
-}
-</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		checkisLogin();
@@ -51,22 +47,22 @@ html, body {
 	</div>
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
-		<div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px; left: 10px;">
-			<a href="" class="w3-bar-item w3-button w3-hover-green w3-round">Clear</a>
+		<div class="w3-bar w3-white w3-card" style="letter-spacing: 4px; left: 10px;" id="topBar">
+			<a href="" class="w3-bar-item w3-button w3-hover-white">Dasao</a>
 			<a class="w3-bar-item"></a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
 			<div class="w3-right w3-mobile">
 
 				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-light-gray w3-round">首頁</a>
+					class="myPagelink w3-bar-item w3-button w3-hover-white">首頁</a>
 				<a href="#post" onclick="Page_change('postPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-light-gray w3-round">我要找人清潔</a>
+					class="myPagelink w3-bar-item w3-button w3-hover-white">我要找人打掃</a>
 				<a href="#list" onclick="Page_change('listPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-light-gray w3-round">我要幫忙清潔</a>
-				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-light-gray w3-round">登入</a>
+					class="myPagelink w3-bar-item w3-button w3-hover-white">我要幫忙打掃</a>
+				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-white">登入</a>
 				<div class="w3-dropdown-click w3-round" id="a_loginOK" style="display: none;">
-					<button class="w3-button w3-white w3-hover-light-gray w3-round" onclick="menuDropdown()">
+					<button class="w3-button w3-white w3-hover-white w3-round" onclick="menuDropdown()">
 						哈囉&nbsp;<span id=span_user_id></span>&ensp;<span class="fa fa-angle-down"></span>
 					</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" id="menu_user" style="right: 0">
@@ -84,116 +80,120 @@ html, body {
 	<!-- 	<div class="w3-container w3-center"> -->
 	<!-- 		<h1 class="w3-xxlarge">Keep Clearing</h1> -->
 	<!-- 	</div> -->
-	<div class="myRWD_height"></div>
-	<!-- Page content -->
-	<div class="container">
-	<div class="w3-content myPage" id="mainPage">
-		<h1 class="w3-xxlarge">Keep Clearing</h1>
-		<!-- About Section -->
-		<div class="w3-card w3-container w3-padding-64 w3-white">
-			<div class="w3-container w3-red w3-cell w3-mobile">
-				<p>發佈</p>
-			</div>
-			<div class="w3-container w3-green w3-cell w3-mobile">
-				<p>清潔</p>
-			</div>
-			<div class="w3-container w3-blue w3-cell w3-mobile">
-				<p>簡單</p>
-			</div>
-		</div>
-
-		<hr>
-	</div>
-
-	<div class="w3-content myPage w3-margin-top" style="display: none;margin-bottom:32px!important" id="postPage">	
-		<div class="w3-container w3-blue w3-center tab_header">
-			<h2>找人幫忙清潔</h2>
-		</div>
-		<br />
-		<div class="w3-container">
-			<div class="w3-row-padding">	
-					<div style="margin-bottom:10px;">
-						<b>請先選擇地區</b>
-						<select id="select_location" class="w3-select w3-border w3-round-large" name="option" >
-						</select>
-					</div>
-					<div style="margin-bottom:10px;">
-						<b>更明確的地址</b>&ensp;<span></span>
-						<input id="post_location_desc" class="w3-input w3-border w3-round-large" type="text" >
-					</div>
-					<div style="margin-bottom:10px;">
-						<b>說說需求吧</b>&ensp;<span></span>
-						<textarea id="post_demand_desc" class="w3-input w3-border w3-round-large" rows="6"  style="resize: none"></textarea>
-					</div>
-					<div style="margin-bottom:10px;">
-						<b>給多少小費?</b>&ensp;<span></span>
-						<input id="post_fee" class="w3-input w3-border w3-round-large" type="text">
-					</div>
-					<b>附個圖吧</b>&ensp;<span></span>
-					<div style="margin-bottom:10px;padding-bottom:10px;" class="w3-border w3-round-large">
-						<input id="fileField" name="files[]" type="file" class="w3-input" onchange='getImg(event);'
-							accept="image/*" placeholder="場地照片?"/>
-						<div id="img_panel" class="w3-row-padding w3-margin-top"></div>
-					</div>
-			</div>
-			<div class="w3-center">
-				<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost(this);">發佈</button>
-				&ensp;<span id="post_status" style="color: red;"></span>
-			</div>
-		</div>
-	</div>
-
-	<div class="w3-content myPage" style="display: none;" id="listPage">
-		<div class="w3-row-padding w3-padding-16">
-			<div class="w3-half">
-				&ensp;<span class="w3-tag w3-xlarge">最</span> <span class="w3-tag w3-xlarge">近</span> <span
-				class="w3-tag w3-xlarge">10</span> <span class="w3-tag w3-xlarge">筆</span>
-			</div>
-			<div class="w3-right">
-				<button class="w3-button w3-black w3-round-xxlarge" id="btn_findSearch">Search</button>
-				<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">Refresh</button>
-			</div>	
-		</div>		
-		<!-- About Section -->
-		<ul class="w3-ul w3-card-4 w3-white" id="ul_findPost">
-			<li class="w3-bar">
-		      <div class="w3-bar-item">
-		        <span class="w3-large">找不到資料</span><br>
-		        <span></span>
-		      </div>
-		    </li>
 	
-		</ul>
+	<!-- Page content -->
+	<div class="container RWD_marginTop">
+		<div class="w3-content myPage w3-padding" id="mainPage">			
+			<h1 class="w3-xxlarge w3-margin-left">歡迎使用 Dasao 打掃媒合平台</h1>
+			<!-- About Section -->
+				<div class="w3-container" id="mainInfo1">
+				  <div class="w3-panel w3-border w3-red w3-round-large">
+				    <h2>發佈</h2>
+				    <p>點選我要找人打掃,輸入需求後即可發布</p>
+				  </div>
+				</div>
+				<div class="w3-container" id="mainInfo2">
+				  <div class="w3-panel w3-border w3-blue w3-round-large">
+				    <h2>清潔</h2>
+				    <p>點選我要幫忙打掃,即可查看所有訊息</p>
+				  </div>
+				</div>
+				<div class="w3-container" id="mainInfo3">
+				  <div class="w3-panel w3-border w3-green w3-round-large">
+				    <h2>簡單</h2>
+				    <p>簡單完成清潔工作</p>
+				  </div>
+				</div>	
+		</div>
 		
-		<div class="w3-center w3-section">
-			<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-left"></i></button>
-			<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-right"></i></button>
-		</div>	
+		<div class="w3-content myPage w3-padding" style="display: none;margin-bottom:16px!important;" id="postPage">				
+			<div class="tab_blue">
+				<div class="w3-container w3-blue w3-center tab_header">
+					<h2>找人幫忙清潔</h2>
+				</div>
+				<br />
+				<div class="w3-container">
+					<div class="w3-row-padding">	
+							<div style="margin-bottom:10px;">
+								<b>選擇地區</b>
+								<select id="select_location" class="w3-select w3-border w3-round-large" name="option" >
+								</select>
+							</div>
+							<div style="margin-bottom:10px;">
+								<b>地址</b>&ensp;<span></span>
+								<input id="post_location_desc" class="w3-input w3-border w3-round-large" type="text" >
+							</div>
+							<div style="margin-bottom:10px;">
+								<b>說明需求</b>&ensp;<span></span>
+								<textarea id="post_demand_desc" class="w3-input w3-border w3-round-large" rows="6"  style="resize: none"></textarea>
+							</div>
+							<div style="margin-bottom:10px;">
+								<b>小費</b>&ensp;<span></span>
+								<input id="post_fee" class="w3-input w3-border w3-round-large" type="text">
+							</div>
+							<b>圖片</b>&ensp;<span></span>
+							<div style="margin-bottom:10px;padding-bottom:10px;" class="w3-border w3-round-large">
+								<input id="fileField" name="files[]" type="file" class="w3-input" onchange='getImg(event);'
+									accept="image/*" placeholder="場地照片?"/>
+								<div id="img_panel" class="w3-row-padding w3-margin-top"></div>
+							</div>
+					</div>
+					<div class="w3-center">
+						<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost(this);">發佈</button>
+						&ensp;<span id="post_status" style="color: red;"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="w3-content myPage" style="display: none;" id="listPage">
+			<div class="w3-row-padding w3-padding-16">
+				<div class="w3-half">
+					&ensp;<span class="w3-tag w3-xlarge">最</span> <span class="w3-tag w3-xlarge">近</span> <span
+					class="w3-tag w3-xlarge">10</span> <span class="w3-tag w3-xlarge">筆</span>
+				</div>
+				<div class="w3-right">
+					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findSearch">Search</button>
+					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">Refresh</button>
+				</div>	
+			</div>		
+			<!-- About Section -->
+			<ul class="w3-ul w3-card-4 w3-white" id="ul_findPost">
+				<li class="w3-bar">
+			      <div class="w3-bar-item">
+			        <span class="w3-large">找不到資料</span><br>
+			        <span></span>
+			      </div>
+			    </li>
 		
-		<hr>
-
-	</div>
+			</ul>
+			
+			<div class="w3-center w3-section">
+				<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-left"></i></button>
+				<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-right"></i></button>
+			</div>				
+		</div>
 	</div>
 	<!-- End page content -->
 	<!-- Footer -->
 	<footer class="w3-center w3-row-padding w3-padding-32 mainfooter">
 		
 		<div class="w3-third">
-			<p class="w3-large">關於 Clear</p>
+			<p class="w3-large">關於 Dasao</p>
 			<p>聯絡我們</p>
 			<p>聯絡我們</p>
 			<p>聯絡我們</p>
 		</div>
 
 		<div class="w3-third">
-			<p class="w3-large">關於 Clear</p>
+			<p class="w3-large">關於 Dasao</p>
 			<p>聯絡我們</p>
 			<p>聯絡我們</p>
 			<p>聯絡我們</p>
 		</div>
 
 		<div class="w3-third">
-			<p class="w3-large">關於 Clear</p>
+			<p class="w3-large">關於 Dasao</p>
 			<p>聯絡我們</p>
 			<p>聯絡我們</p>
 			<p>聯絡我們</p>
@@ -274,7 +274,7 @@ html, body {
 			}
 			document.getElementById(PageName).style.display = "block";
 			$(elmnt).addClass('activeTablink');
-			PageInitial(PageName);			
+			PageInitial(PageName);	
 		}
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();

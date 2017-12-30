@@ -13,22 +13,12 @@
     background-color: rgba(0,0,0,0.2);
 }
 
-#tabLogin,#postPage {background-color:white;border: 1px solid #2196F3;padding-bottom:20px; border-radius: 10px;}
+#tabLogin,.tab_blue {background-color:white;border: 1px solid #2196F3;padding-bottom:20px; border-radius: 10px;}
 #tabReg {background-color:white;border: 1px solid #009688;padding-bottom:20px;border-radius: 10px;}
 #tabForget {background-color:white;border: 1px solid #ff9800;padding-bottom:20px;border-radius: 10px;}
 .tab_green {background-color:white;border: 1px solid #009688;padding-bottom:20px;border-radius: 10px;}
 
 .tab_header{border-radius: 10px 10px 0 0;}
-
-.activeTablink{
-	background-color:#2196F3 !important;
-	color:#fff !important;
-}
-
-.activeTablink:hover{
-	background-color:#2196F3 !important;
-	color:#fff !important;
-}
 
 .w3-container label{
 	text-align:left;

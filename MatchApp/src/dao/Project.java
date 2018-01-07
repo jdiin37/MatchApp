@@ -2,10 +2,15 @@ package dao;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.JsonArray;
+
 import dto.user_basicObj;
 import dto.location_basicObj;
 import dto.post_basicObj;
 import dto.js_postQueryObj;
+import dto.img_basicObj;
 
 public class Project {
 	public ArrayList<location_basicObj> GetLocations(Connection connection) throws Exception {
@@ -20,6 +25,33 @@ public class Project {
 				location_basicData.add(Object);
 			}
 			return location_basicData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public ArrayList<img_basicObj> GetImgs(Connection connection,List<img_basicObj> postIds) throws Exception {
+		ArrayList<img_basicObj> imgs = new ArrayList<img_basicObj>();
+		String inClause = "";
+		for(int i = 0;i < postIds.size(); i++){
+			if (i == postIds.size() - 1) {
+				inClause += postIds.get(i).getPost_id();
+			}else {
+				inClause += postIds.get(i).getPost_id() + ",";
+			}
+		}
+		//System.out.println(inClause);
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT id,post_id,img FROM img_basic Where post_id In (" +inClause +")order by id");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				img_basicObj Object = new img_basicObj();
+				Object.setId(rs.getInt("id"));
+				Object.setPost_id(rs.getInt("post_id"));
+				Object.setImg(rs.getBlob("img"));
+				imgs.add(Object);
+			}
+			return imgs;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -55,6 +87,25 @@ public class Project {
 			while (rs.next()) {				
 				Object.setUser_id(rs.getString("user_id"));
 				Object.setPassword("****");
+				Object.setAuth(rs.getString("auth"));
+				Object.setEmail(rs.getString("email"));
+			}
+			return Object;
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+	
+	public user_basicObj forgetUser(Connection connection, user_basicObj userObj) throws Exception {
+		user_basicObj Object = new user_basicObj();
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT user_id,password,auth,email FROM user_basic Where email = ? ");
+			ps.setString(1, userObj.getEmail());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {				
+				Object.setUser_id(rs.getString("user_id"));
+				Object.setPassword(rs.getString("password"));
 				Object.setAuth(rs.getString("auth"));
 				Object.setEmail(rs.getString("email"));
 			}

@@ -1,11 +1,13 @@
 var reg_obj = { user_id:"",password:"",email:""};
 
 var login_obj = { user_id:"",password:"",email:""};
-
+var forget_obj = { user_id:"",password:"",email:""};
 var post_obj = { user_id:"",location:"",location_desc:"",demand_desc:"",fee:""};
 
 var postQuery_obj = { rowNumber:10,startId:0,endId:0};
 
+var img_obj = { id:"",post_id:"",imgs:""};
+var imgObj_array =[];
 //dropdown
 function menuDropdown() {
     var x = document.getElementById("menu_user");
@@ -155,6 +157,7 @@ function clickFindRefresh(element){
 			return false;
 		}
 		if(data.length > 0){
+			now_postIds = [];
 			var ul = $('#ul_findPost');
 			ul.html("");
 			var li = "";
@@ -165,15 +168,49 @@ function clickFindRefresh(element){
 				     '<span class="w3-large">' +obj.location+ '</span><span>'+obj.location_desc +'</span><br>' +
 				     '<span>' + obj.demand_desc +'</span>' +
 				     '</div>'+
-				     '<div class="w3-right w3-bar-item "><br/><span>' + obj.user_id +'</span></div>' +
+				     '<div class="w3-right w3-bar-item "><br/><span>' + obj.user_id + '#' + obj.id +'</span></div>' +
 				     '</li>';
 				ul.append(li);
+				imgObj_array.push({post_id:obj.id});
 			});
+			getImgs();
 		}else{
 			//I don't find anything!!
 		}
 	});
 	
+}
+
+function getImgs(){
+	$.when(ajax_GetImgs()).done(function(data) {	
+		if(data == undefined){
+			//something wrong!!
+			return false;
+		}
+		if(data.length > 0){
+			$.each(data,function(index,obj){
+				//console.log(new Blob([JSON.stringify(obj.img)]))
+				var data = btoa(JSON.stringify(obj.img));
+				//var aaa = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+				//var url = "data:image/jpeg;base64," + data;
+				var blob = new Blob([data],{type : 'image/jpeg'});
+				var url = URL.createObjectURL(blob);
+				//console.log(blob);
+				
+//				$('#listPage').append("<div class='w3-half'>"
+//						+ "<div class='w3-card'>"
+//						+ "<a href='" + url +"' target='_blank'>"
+//						+ "<img src='"
+//						+ url
+//						+ "' style='width:100%;height:200px;'></a>"
+//						+ "<div class='w3-container'>"
+//						+ "<h5>"
+//						+ "Test"
+//						+ "<span class='img_remove fa fa-close' style='float:right;'></span></h5>"
+//						+ "</div></div></div>");
+			});
+		}
+	});
 }
 
 //post click function
@@ -258,8 +295,7 @@ function clickLogin(element){
 	
 };
 
-function clickReg(element){	
-	
+function clickReg(element){		
 	if ($('#reg_id').val().length > 4 && engnum_regex.test($('#reg_id').val())) {		
 		stateChange(true, '#reg_id');
 		reg_obj.user_id = $('#reg_id').val();
@@ -295,10 +331,11 @@ function clickReg(element){
 	lock_btn(element);
 	$.when(ajax_reg()).done(function(data) {
 		unlock_btn(element);
-		if(data.user_id == undefined){
+		if(data.user_id == undefined){			
 			$('#reg_status').html("此帳號已有人使用");
 		}else{
 			$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');
+			
 			stateChange(true, '#reg_id',"","");
 			stateChange(true, '#reg_pw',"","");
 			stateChange(true, '#reg_pw_re',"","");
@@ -307,7 +344,26 @@ function clickReg(element){
 	});			
 	
 }
-
+function clickForget(element){	
+	
+	if ($('#forget_email').val().length > 0 && email_regex.test($('#forget_email').val())) {		
+		stateChange(true, '#forget_email');
+		forget_obj.email = $('#forget_email').val();
+	} else {
+		stateChange(false, '#forget_email', "請輸入正確的email格式");
+		return false;
+	}
+	lock_btn(element);
+	$.when(ajax_forget()).done(function(data) {
+		unlock_btn(element);
+		if(data.user_id == undefined){
+			$('#forget_status').html("查無此信箱");
+		}else{
+			$('#forget_status').html("以寄信至:" + data.email).css('color','green');
+			stateChange(true, '#forget_email',"","");
+		}
+	});
+}
 
 
 //bind
@@ -478,6 +534,16 @@ function ajax_reg(){
 	});
 }
 
+function ajax_forget(){
+	return $.ajax({
+		type: 'POST',
+		url: "WebAPI/User/Forget",
+		contentType: 'application/json; charset=UTF-8',
+		data:JSON.stringify(forget_obj),
+		dataType: "json"
+	});
+}
+
 function ajax_CrePost(){
 	return $.ajax({
 		type: 'POST',
@@ -494,6 +560,16 @@ function ajax_GetPosts(){
 		url: "WebAPI/Post/GetPosts",
 		contentType: 'application/json; charset=UTF-8',
 		data:JSON.stringify(postQuery_obj),
+		dataType: "json"
+	});
+}
+
+function ajax_GetImgs(){
+	return $.ajax({
+		type: "POST",
+		url: "WebAPI/Img/GetImg",
+		contentType: 'application/json; charset=UTF-8',
+		data:JSON.stringify(imgObj_array),
 		dataType: "json"
 	});
 }
@@ -521,7 +597,7 @@ function stateChange(state, objID, msg,inival) {
 			$(objID).val(inival);
 		};
 	} else {
-		$(objID).addClass('w3-border w3-border-red');
+		$(objID).addClass('w3-border-red');
 		$(objID).prev('span').html(msg).addClass('w3-text-red');
 	}
 }

@@ -53,7 +53,7 @@ public class Post {
 			ProjectManager projectManager = new ProjectManager();
 			postList = projectManager.GetPosts(queryObj);
 			Gson gson = new Gson();
-			System.out.println(gson.toJson(postList));
+			//System.out.println(gson.toJson(postList));
 			posts = gson.toJson(postList);
 		}
 

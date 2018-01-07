@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import model.ProjectManager;
 import com.google.gson.Gson;
 import dto.user_basicObj;
+import WebAPI.Utility;
 
 @Path("/User")
 public class User {
@@ -41,12 +42,12 @@ public class User {
 	@Consumes({ MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/Login")
-	public String Login(user_basicObj cre_user) {
+	public String Login(user_basicObj login_user) {
 		String users = null;
 
 		try {
 			//user_basicObj newUser = new Gson().fromJson(cre_user, user_basicObj.class);
-			user_basicObj newUser = cre_user;
+			user_basicObj newUser = login_user;
 			ProjectManager projectManager = new ProjectManager();
 			newUser = projectManager.IsUser(newUser);
 			Gson gson = new Gson();
@@ -75,6 +76,31 @@ public class User {
 			Gson gson = new Gson();
 			System.out.println(gson.toJson(newUser));
 			users = gson.toJson(newUser);
+			WebAPI.Utility.SendMail(newUser,0);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return users;
+	}
+	
+	@POST 
+	@Consumes({ MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/Forget")
+	public String Forget(user_basicObj forget_user) {
+		String users = null;
+
+		try {
+			//user_basicObj newUser = new Gson().fromJson(cre_user, user_basicObj.class);
+			user_basicObj forgetUser = forget_user;
+			ProjectManager projectManager = new ProjectManager();
+			forgetUser = projectManager.forgetUser(forgetUser);
+			Gson gson = new Gson();
+			//System.out.println(gson.toJson(forgetUser));
+			users = gson.toJson(forgetUser);
+			WebAPI.Utility.SendMail(forgetUser,1);
 		}
 
 		catch (Exception e) {

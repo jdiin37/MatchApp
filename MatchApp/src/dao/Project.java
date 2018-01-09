@@ -131,8 +131,11 @@ public class Project {
 			// returned to the client.
 			int id = rs.getInt(1);
 			userObj.setId(id);
+			userObj.setServerMsg("OK");
 		} catch (Exception e) {
-			throw e;
+			userObj.setServerMsg(e.getMessage().toString());
+			System.out.println(e.getMessage());
+			//throw e;
 		}
 		return userObj;
 

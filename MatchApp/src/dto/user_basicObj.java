@@ -3,7 +3,7 @@ package dto;
 import java.time.LocalDateTime;
 
 public class user_basicObj {
-
+	private String serverMsg;
 	private Integer id;
 
 	public Integer getId() {
@@ -11,6 +11,12 @@ public class user_basicObj {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getServerMsg() {
+		return serverMsg;
+	}
+	public void setServerMsg(String serverMsg) {
+		this.serverMsg = serverMsg;
 	}
 	private String status;
 	private String user_id;

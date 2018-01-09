@@ -8,6 +8,7 @@ var postQuery_obj = { rowNumber:10,startId:0,endId:0};
 
 var img_obj = { id:"",post_id:"",imgs:""};
 var imgObj_array =[];
+var errmsg ="";
 //dropdown
 function menuDropdown() {
     var x = document.getElementById("menu_user");
@@ -133,12 +134,22 @@ function getCookie(cname) {
 //lock btn
 function lock_btn(obj){
 	$(obj).prop('disabled', true);
+	$(obj).hide();
 	$(obj).css('cursor','wait');
+	$(obj).after('<h3 style="color:gray">請稍後</h3>');
+	waitMsg();
+	function waitMsg(){
+		var msg = $(obj).next().text();
+		$(obj).next().text(msg + ".");	
+		setTimeout(function(){waitMsg()},1000);
+	}
 }
 
 function unlock_btn(obj){
 	$(obj).prop('disabled', false);
+	$(obj).show();
 	$(obj).css('cursor','');
+	$(obj).next().remove();
 }
 
 
@@ -284,9 +295,10 @@ function clickLogin(element){
 	
 	lock_btn(element);
 	$.when(ajax_login()).done(function(data) {
-		unlock_btn(element);
+		
 		if(data.user_id == undefined){
 			$('#login_status').html("帳號密碼有誤");
+			unlock_btn(element);
 		}else{
 			login_obj = data;
 			loginOK();
@@ -331,16 +343,18 @@ function clickReg(element){
 	lock_btn(element);
 	$.when(ajax_reg()).done(function(data) {
 		unlock_btn(element);
-		if(data.user_id == undefined){			
-			$('#reg_status').html("此帳號已有人使用");
+		if(data.serverMsg.indexOf("email") > 0){			
+			$('#reg_status').html("此E-mail已經被使用");
+		}else if(data.serverMsg.indexOf("PRIMARY") > 0){
+			$('#reg_status').html("此帳號已經被使用");
 		}else{
-			$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');
-			
+			$('#reg_status').html("恭喜你註冊成功:" + data.user_id + ",請至登入頁面登入").css('color','green');			
 			stateChange(true, '#reg_id',"","");
 			stateChange(true, '#reg_pw',"","");
 			stateChange(true, '#reg_pw_re',"","");
-			stateChange(true, '#reg_email',"","");
+			stateChange(true, '#reg_email',"","");	
 		}
+		
 	});			
 	
 }
@@ -531,7 +545,7 @@ function ajax_reg(){
 		contentType: 'application/json; charset=UTF-8',
 		data:JSON.stringify(reg_obj),
 		dataType: "json"
-	});
+	});			
 }
 
 function ajax_forget(){

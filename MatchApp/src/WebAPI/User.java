@@ -76,7 +76,9 @@ public class User {
 			Gson gson = new Gson();
 			System.out.println(gson.toJson(newUser));
 			users = gson.toJson(newUser);
-			WebAPI.Utility.SendMail(newUser,0);
+			if(newUser.getServerMsg().equals("OK")) {
+				WebAPI.Utility.SendMail(newUser,0);
+			}
 		}
 
 		catch (Exception e) {
@@ -96,13 +98,12 @@ public class User {
 			//user_basicObj newUser = new Gson().fromJson(cre_user, user_basicObj.class);
 			user_basicObj forgetUser = forget_user;
 			ProjectManager projectManager = new ProjectManager();
-			forgetUser = projectManager.forgetUser(forgetUser);
+			forgetUser = projectManager.forgetUser(forgetUser);			
 			Gson gson = new Gson();
 			//System.out.println(gson.toJson(forgetUser));
-			users = gson.toJson(forgetUser);
+			users = gson.toJson(forgetUser);	
 			WebAPI.Utility.SendMail(forgetUser,1);
 		}
-
 		catch (Exception e) {
 			System.out.println("Exception Error"); // Console
 		}

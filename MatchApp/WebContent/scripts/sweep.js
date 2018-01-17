@@ -4,11 +4,22 @@ var login_obj = { user_id:"",password:"",email:""};
 var forget_obj = { user_id:"",password:"",email:""};
 var post_obj = { user_id:"",location:"",location_desc:"",demand_desc:"",fee:""};
 
-var postQuery_obj = { rowNumber:10,startId:0,endId:0};
+var postQuery_obj = { rowNumber:10,startId:0,endId:0,user_id:"",location:"",location_desc:"",fee:0,demand_desc:""};
 
 var img_obj = { id:"",post_id:"",imgs:""};
 var imgObj_array =[];
 var errmsg ="";
+
+//obj function
+function set_postQuery_obj(key,value){
+	postQuery_obj[key] = value;
+}
+
+function reset_postQuery_obj(key,value){
+	postQuery_obj = { rowNumber:10,minId:0,maxId:0,user_id:"",location:"",location_desc:"",fee:0,demand_desc:""};
+}
+//
+
 //dropdown
 function menuDropdown() {
     var x = document.getElementById("menu_user");
@@ -18,6 +29,8 @@ function menuDropdown() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+
+
 
 
 //block UI
@@ -40,23 +53,27 @@ function setBlock(second){
 function PageInitial(page){
 	switch(page) {
 	case "mainPage":
-		
-		$('#mainInfo1,#mainInfo2,#mainInfo3').hide();
-		
-		$('#mainInfo1').fadeIn("slow",function(){
-			$('#mainInfo2').fadeIn("slow",function(){
-				$('#mainInfo3').fadeIn("slow");				
-			});			
-		});
+		//$('#mainInfo1,#mainInfo2,#mainInfo3').hide();
+		$('#mainInfo1 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+		$('#mainInfo2 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+		$('#mainInfo3 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+
+//		$('#mainInfo1 h2').fadeIn("slow",function(){
+//			$('#mainInfo2 h2').fadeIn("slow",function(){
+//				$('#mainInfo3 h2').fadeIn("slow");				
+//			});			
+//		});
 		break;
 	case "postPage":
-		$("#postPage").hide();
-		$("#postPage").slideDown("slow");
+//		$("#postPage").hide();
+//		$("#postPage").slideDown("slow");
+		$('#post_content').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+		
 		if(checkisLogin()){
 			$('#btn_post').show();
 			$('#post_status').html("");
 			$.when(ajax_getLocation()).done(function(data){
-				$('#select_location').html("").append('<option value="" disabled selected>請選擇地區</option>');
+				$('#select_location').html("").append('<option value="" disabled selected></option>');
 				$.each(data,function(index,obj){
 					$('#select_location').append('<option value="'+obj.location+'">' +obj.location +'</option>')
 				});
@@ -68,6 +85,7 @@ function PageInitial(page){
 		break;	
 	case "listPage":		
 		clickFindRefresh();
+		
 		break;	
 	}
 }
@@ -132,16 +150,18 @@ function getCookie(cname) {
     return "";
 }
 //lock btn
-function lock_btn(obj){
+function lock_btn(obj,showWait){
 	$(obj).prop('disabled', true);
 	$(obj).hide();
 	$(obj).css('cursor','wait');
-	$(obj).after('<h3 style="color:gray">請稍後</h3>');
-	waitMsg();
-	function waitMsg(){
-		var msg = $(obj).next().text();
-		$(obj).next().text(msg + ".");	
-		setTimeout(function(){waitMsg()},1000);
+	if(showWait){
+		$(obj).after('<h3 style="color:gray">請稍後</h3>');
+		waitMsg();
+		function waitMsg(){
+			var msg = $(obj).next('h3').text();
+			$(obj).next('h3').text(msg + ".");	
+			setTimeout(function(){waitMsg()},1000);
+		}		
 	}
 }
 
@@ -149,47 +169,92 @@ function unlock_btn(obj){
 	$(obj).prop('disabled', false);
 	$(obj).show();
 	$(obj).css('cursor','');
-	$(obj).next().remove();
+	$(obj).next('h3').remove();
 }
 
 
 //find click function
 function clickFindRefresh(element){
+	reset_postQuery_obj();
 	setBlock(500);
-	if( element != undefined){
-		lock_btn(element);		
-	}
-	$.when(ajax_GetPosts()).done(function(data) {	
-		if( element != undefined){
-			unlock_btn(element);		
-		}
+	$.when(ajax_GetPosts()).done(function(data) {			
 		if(data == undefined){
 			//something wrong!!
 			return false;
 		}
 		if(data.length > 0){
-			now_postIds = [];
-			var ul = $('#ul_findPost');
-			ul.html("");
-			var li = "";
-			$.each(data,function(index,obj){
-				li = '<li class="w3-bar">' +
-				     '<img src="" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">' +
-				     '<div class="w3-bar-item">' +
-				     '<span class="w3-large">' +obj.location+ '</span><span>'+obj.location_desc +'</span><br>' +
-				     '<span>' + obj.demand_desc +'</span>' +
-				     '</div>'+
-				     '<div class="w3-right w3-bar-item "><br/><span>' + obj.user_id + '#' + obj.id +'</span></div>' +
-				     '</li>';
-				ul.append(li);
-				imgObj_array.push({post_id:obj.id});
-			});
-			getImgs();
+			createPost(data);
 		}else{
 			//I don't find anything!!
 		}
 	});
 	
+}
+
+function createPost(data){
+	var ul = $('#ul_findPost');
+	ul.html("");
+	var li = "";
+	$.each(data,function(index,obj){
+		li = '<li class="w3-bar">' +
+		     '<div class="w3-bar-item">#<span class="post_item">' + obj.id + '</span></div>' +
+		     '<div class="w3-bar-item">' +
+		     '<span class="w3-large">' +obj.location+ '</span><span>'+obj.location_desc +'</span><br>' +
+		     '<span>' + obj.demand_desc +'</span>' +
+		     '</div>'+
+		     '<div class="w3-right w3-bar-item "><br/><span>' + obj.user_id +'</span></div>' +
+		     '</li>';
+		ul.append(li);
+		imgObj_array.push({post_id:obj.id});
+	});
+	getImgs();
+}
+
+function clickPre10(element){	
+	var postids = [];
+	$(".post_item").each(function() {
+		postids.push($(this).text());
+	});
+	var maxId = Math.max.apply(Math,postids);
+	//alert(maxId);
+	reset_postQuery_obj();
+	set_postQuery_obj("maxId",maxId);
+	setBlock(500);
+	$.when(ajax_GetPosts()).done(function(data) {			
+		if(data == undefined){
+			//something wrong!!
+			return false;
+		}
+		if(data.length > 0){
+			createPost(data);
+		}else{
+			//I don't find anything!!
+		}
+	});
+	
+}
+
+function clickNext10(element){
+	var postids = [];
+	$(".post_item").each(function() {
+		postids.push($(this).text());
+	});
+	var minId = Math.min.apply(Math,postids);
+	reset_postQuery_obj();
+	set_postQuery_obj("minId",minId);
+	setBlock(500);
+	$.when(ajax_GetPosts()).done(function(data) {	
+		
+		if(data == undefined){
+			//something wrong!!
+			return false;
+		}
+		if(data.length > 0){
+			createPost(data);
+		}else{
+			//I don't find anything!!
+		}
+	});
 }
 
 function getImgs(){
@@ -261,7 +326,7 @@ function clickPost(element){
 		return false;
 	}
 	
-	lock_btn(element);
+	lock_btn(element,true);
 	//alert(JSON.stringify(post_obj));
 	setTimeout(function(){
 		$.when(ajax_CrePost()).done(function(data) {		
@@ -275,6 +340,7 @@ function clickPost(element){
 	},1000);
 	
 }
+
 //login click function
 function clickLogin(element){	
 	if ($('#login_id').val().length > 0 && engnum_regex.test($('#login_id').val())) {		
@@ -293,7 +359,7 @@ function clickLogin(element){
 		return false;
 	}		
 	
-	lock_btn(element);
+	lock_btn(element,true);
 	$.when(ajax_login()).done(function(data) {
 		
 		if(data.user_id == undefined){
@@ -340,7 +406,7 @@ function clickReg(element){
 		return false;
 	}
 	
-	lock_btn(element);
+	lock_btn(element,true);
 	$.when(ajax_reg()).done(function(data) {
 		unlock_btn(element);
 		if(data.serverMsg.indexOf("email") > 0){			
@@ -367,7 +433,7 @@ function clickForget(element){
 		stateChange(false, '#forget_email', "請輸入正確的email格式");
 		return false;
 	}
-	lock_btn(element);
+	lock_btn(element,true);
 	$.when(ajax_forget()).done(function(data) {
 		unlock_btn(element);
 		if(data.user_id == undefined){

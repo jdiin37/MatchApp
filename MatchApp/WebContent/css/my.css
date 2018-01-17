@@ -5,6 +5,27 @@ h1,h2,h3,h4,h5,h6{
 	font-family: Verdana,Microsoft YaHei, sans-serif !important;
 }
 
+.my_black{color:#fff!important;background-color:#242729!important}
+.border_my_black{border-color:#242729!important}
+
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes whitetoblack {
+    from {color: white;}
+    to {color: black;}
+}
+
+/* Standard syntax */
+@keyframes whitetoblack {
+     from {color: white;}
+    to {color: black;}
+}
+
+/* #mainPage .w3-panel:hover{ */
+/* 	background-color:black !important; */
+/* 	color:#fff !important; */
+/* } */
+
 #menu_user{
 	right:0;
 }
@@ -47,7 +68,7 @@ h1,h2,h3,h4,h5,h6{
 .mainfooter{
 	color:#fff !important;
 /*  	background-color:#ff9800 !important;  */
- 	background-color:#8bc34a !important; 
+ 	background-color:#242729 !important; 
 }
 
 body{

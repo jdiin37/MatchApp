@@ -169,9 +169,22 @@ public class Project {
 	public ArrayList<post_basicObj> GetPosts(Connection connection,js_postQueryObj queryObj) throws Exception {
 		ArrayList<post_basicObj> postList = new ArrayList<post_basicObj>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT id,user_id,location,location_desc,demand_desc,fee,cre_date,mod_date FROM post_basic order by id desc LIMIT ? ");
-			ps.setInt(1, queryObj.getRowNumber());
-			
+			PreparedStatement ps; 
+			if(queryObj.getMaxId() > 0) {
+				ps = connection.prepareStatement("SELECT id,user_id,location,location_desc,demand_desc,fee,cre_date,mod_date "
+						+ "FROM post_basic Where id > ? order by id desc LIMIT ?");
+				ps.setInt(1, queryObj.getMaxId());
+				ps.setInt(2, queryObj.getRowNumber());
+			}else if(queryObj.getMinId() > 0) {
+				ps = connection.prepareStatement("SELECT id,user_id,location,location_desc,demand_desc,fee,cre_date,mod_date "
+						+ "FROM post_basic Where id < ? order by id desc LIMIT ?");
+				ps.setInt(1, queryObj.getMinId());
+				ps.setInt(2, queryObj.getRowNumber());
+			}else {
+				ps = connection.prepareStatement("SELECT id,user_id,location,location_desc,demand_desc,fee,cre_date,mod_date "
+					+ "FROM post_basic order by id desc LIMIT ?");
+				ps.setInt(1, queryObj.getRowNumber());			
+			}
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				post_basicObj Object = new post_basicObj();

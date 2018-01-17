@@ -14,7 +14,7 @@
 <script src="scripts/jquery.cookie.min.js"></script>
 <script src="scripts/jquery.blockUI.js"></script>
 <script src="scripts/sweep.js?2"></script>
-<title>Sweep_Login</title>
+<title>Dasao_Login</title>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -61,8 +61,8 @@
 
 	<div style='height: 100px'></div>
 	<div class="w3-container container">
-		<div id="tabLogin" class="w3-content tabcontent_login">
-			<div class="w3-container w3-blue w3-center tab_header">
+		<div id="tabLogin" class="w3-content tabcontent_login tab_myblack">
+			<div class="w3-container my_black w3-center tab_header">
 				<h2>登入</h2>
 			</div>
 			<br />
@@ -79,13 +79,13 @@
 					<span id="login_status" style="color: red;"></span>
 				</div>
 				<div class="w3-center">
-					<button class="w3-btn w3-blue" id="btn_login" onclick="clickLogin(this);">登入</button>
+					<button class="w3-btn my_black w3-round-large" id="btn_login" onclick="clickLogin(this);">登入</button>
 				</div>
 			</div>
 		</div>
 
-		<div id="tabReg" class="tabcontent_login w3-content" style="display: none;">
-			<div class="w3-container w3-teal w3-center tab_header">
+		<div id="tabReg" class="tabcontent_login w3-content tab_myblack" style="display: none;">
+			<div class="w3-container my_black w3-center tab_header">
 				<h2>註冊</h2>
 			</div>
 			<br />
@@ -107,7 +107,7 @@
 				</label>
 				&ensp;<span></span> <input class="w3-input" type="text" id="reg_email"> <br />
 				<div class="w3-center">
-					<button class="w3-btn w3-teal" id="btn_reg" onclick="clickReg(this);">註冊</button>				
+					<button class="w3-btn my_black w3-round-large" id="btn_reg" onclick="clickReg(this);">註冊</button>				
 				</div>
 				<div class="w3-center">
 					<br/>
@@ -116,8 +116,8 @@
 			</div>
 		</div>
 		
-		<div id="tabForget" class="tabcontent_login w3-content" style="display: none;">
-			<div class="w3-container w3-orange w3-center tab_header">
+		<div id="tabForget" class="tabcontent_login w3-content tab_myblack" style="display: none;">
+			<div class="w3-container my_black w3-center tab_header">
 				<h2>忘記密碼?</h2>
 			</div>
 			<br />
@@ -132,7 +132,7 @@
 					<span id="forget_status" style="color: red;"></span>
 				</div>
 				<div class="w3-center">
-					<button class="w3-btn w3-orange" id="btn_Forget" onclick="clickForget(this);">確認</button>				
+					<button class="w3-btn my_black w3-round-large" id="btn_Forget" onclick="clickForget(this);">確認</button>				
 				</div>
 			</div>
 		</div>

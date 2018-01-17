@@ -86,35 +86,43 @@
 		<div class="w3-content myPage w3-padding" id="mainPage">			
 			<h1 class="w3-xxlarge w3-margin-left">歡迎使用 Dasao 打掃媒合平台</h1>
 			<!-- About Section -->
-				<div class="w3-container" id="mainInfo1">
-				  <div class="w3-panel w3-white w3-bottombar w3-border-blue w3-border w3-round-large">
+				<div class="w3-container w3-half" id="mainInfo1">
+				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
 				    <h2>發佈</h2>
 				    <p>點選我要找人打掃,輸入需求後即可發布</p>
 				  </div>
 				</div>
-				<div class="w3-container" id="mainInfo2">
-				  <div class="w3-panel w3-white w3-bottombar w3-border-orange w3-border w3-round-large">
+				<div class="w3-container w3-half" id="mainInfo2">
+				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
 				    <h2>打掃</h2>
 				    <p>點選我要幫忙打掃,即可查看所有訊息</p>
 				  </div>
 				</div>
 				<div class="w3-container" id="mainInfo3">
-				  <div class="w3-panel w3-white w3-bottombar w3-border-green w3-border w3-round-large">
-				    <h2>簡單</h2>
-				    <p>簡單完成打掃工作</p>
-				    <p>簡單賺取費用</p>
+				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
+				    <h2>個人紀錄</h2>
+				    <p>您已完成的打掃: 1</p>
+				    	<div class="border_my_black w3-border w3-round-large">
+				    		<p style="margin-left:6px">2017/01/09 屏東市 整理道路</p>
+				    	</div>
+				    <p>您正在發布的打掃: 2</p>
+				    	<div class="border_my_black w3-border w3-round-large">
+				    		<p style="margin-left:6px">2018/01/01 屏東市 住家整理</p>
+				    		<p style="margin-left:6px">2018/01/01 屏東市 花園整理</p>
+				    	</div>
+				    <br/>	
 				  </div>
 				</div>	
 		</div>
 		
 		<div class="w3-content myPage w3-padding" style="display: none;margin-bottom:16px!important;" id="postPage">				
-			<div class="tab_blue">
-				<div class="w3-container w3-blue w3-center tab_header">
+			<div class="tab_myblack">
+				<div class="w3-container my_black w3-center tab_header">
 					<h2>找人打掃</h2>
 				</div>
 				<br />
 				<div class="w3-container">
-					<div class="w3-row-padding">	
+					<div class="w3-row-padding" id="post_content">	
 							<div style="margin-bottom:10px;">
 								<b>選擇地區</b>
 								<select id="select_location" class="w3-select w3-border w3-round-large" name="option" >
@@ -140,7 +148,7 @@
 <!-- 							</div> -->
 					</div>
 					<div class="w3-center">
-						<button class="w3-btn w3-blue" id="btn_post" onclick="clickPost(this);">發佈</button>
+						<button class="w3-btn my_black w3-round-large" id="btn_post" onclick="clickPost(this);">發佈</button>
 						&ensp;<span id="post_status" style="color: red;"></span>
 					</div>
 				</div>
@@ -154,8 +162,8 @@
 					class="w3-tag w3-xlarge">10</span> <span class="w3-tag w3-xlarge">筆</span>
 				</div>
 				<div class="w3-right">
-					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findSearch">Search</button>
-					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">Refresh</button>
+					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findSearch" onclick="clickSearch(this);">進階查詢</button>
+					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">回到第一頁</button>
 				</div>	
 			</div>		
 			<!-- About Section -->
@@ -170,8 +178,8 @@
 			</ul>
 			
 			<div class="w3-center w3-section">
-				<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-left"></i></button>
-				<button class="w3-button w3-black w3-round-xxlarge"><i class="fa fa-angle-right"></i></button>
+				<button class="w3-button w3-black w3-round-xxlarge" onclick="clickPre10(this);"><i class="fa fa-angle-left"></i> 上一頁</button>
+				<button class="w3-button w3-black w3-round-xxlarge" onclick="clickNext10(this);">下一頁 <i class="fa fa-angle-right"></i></button>
 			</div>				
 		</div>
 	</div>
@@ -275,6 +283,9 @@
 			}
 			document.getElementById(PageName).style.display = "block";
 			$(elmnt).addClass('activeTablink');
+			$('html,body').animate({
+	            scrollTop: 0
+	        }, 100);
 			PageInitial(PageName);	
 		}
 		// Get the element with id="defaultOpen" and click on it

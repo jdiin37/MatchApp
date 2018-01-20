@@ -45,6 +45,72 @@
 		<!-- Modal Caption (Image Text) -->
 		<div id="caption"></div>
 	</div>
+	
+	
+	<div id="postModal" class="modal">
+
+		<!-- The Close Button -->
+		
+
+		<!-- Modal Content (The Image) -->
+		<div class="container w3-white w3-round-large w3-margin-top w3-margin-bottom" >
+			<span class="close" onclick='clickCloseModal(this);'>&times;</span>
+			<div style="padding-top:8px;">
+				<span id="span_post_title1" class="w3-xxlarge">title1</span><br/>
+			</div>
+			
+			<div class="w3-row-padding">
+				<div class="w3-left">
+					<span id="span_post_title2">title2</span><br/>
+				</div>
+				<div class="w3-right">
+					<span>發佈者:</span><span id="span_post_user">user</span>&nbsp;
+					<span>發佈時間:</span><span id="span_post_time">time</span>
+				</div>
+			</div>
+			<hr/>
+			<div class="w3-row-padding">
+				<div id="div_post_content">content</div>
+			</div>
+			<hr/>
+			<div id="div_post_comment" class="">
+				<h3>留言</h3>
+				<textarea id="textarea_comment" class="w3-input w3-border w3-round-large w3-margin-bottom" rows="4"  style="resize: none;display:inline-block"></textarea>
+				<div class="w3-row-padding">
+					&nbsp;
+					<button class="w3-button w3-black w3-round-xxlarge w3-right" onclick="">確定</button>
+				</div>
+			</div>
+			<hr/>
+			<div id="div_post_commented" class="w3-padding">
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+				<h2>馬因酒</h2>
+				<div>hahaha</div>
+				<hr/>
+			</div>
+		</div>
+		<!-- Modal Caption (Image Text) -->
+		
+	</div>
+	
+	
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-white w3-card" style="letter-spacing: 4px; left: 10px;" id="topBar">
@@ -57,7 +123,7 @@
 				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this)"
 					class="myPagelink w3-bar-item w3-button w3-hover-white">首頁</a>
 				<a href="#post" onclick="Page_change('postPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-white">我要找人打掃</a>
+					class="myPagelink w3-bar-item w3-button w3-hover-white">發佈打掃訊息</a>
 				<a href="#list" onclick="Page_change('listPage', this)"
 					class="myPagelink w3-bar-item w3-button w3-hover-white">我要幫忙打掃</a>
 				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-white">登入</a>
@@ -89,7 +155,7 @@
 				<div class="w3-container w3-half" id="mainInfo1">
 				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
 				    <h2>發佈</h2>
-				    <p>點選我要找人打掃,輸入需求後即可發布</p>
+				    <p>點選發佈打掃訊息,輸入需求後即可發布</p>
 				  </div>
 				</div>
 				<div class="w3-container w3-half" id="mainInfo2">
@@ -158,14 +224,28 @@
 		<div class="w3-content myPage" style="display: none;" id="listPage">
 			<div class="w3-row-padding w3-padding-16">
 				<div class="w3-half">
-					&ensp;<span class="w3-tag w3-xlarge">最</span> <span class="w3-tag w3-xlarge">近</span> <span
-					class="w3-tag w3-xlarge">10</span> <span class="w3-tag w3-xlarge">筆</span>
+					&ensp;<span class="w3-tag w3-xlarge">打</span> <span class="w3-tag w3-xlarge">掃</span> <span
+					class="w3-tag w3-xlarge">清</span> <span class="w3-tag w3-xlarge">單</span>
 				</div>
 				<div class="w3-right">
-					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findSearch" onclick="clickSearch(this);">進階查詢</button>
+					<button class="w3-button w3-black w3-round-xxlarge" id="btn_advQuery" onclick="clickAdvQuery(this);">進階查詢</button>
 					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">回到第一頁</button>
 				</div>	
 			</div>		
+			<div id="div_advQuery" class="w3-row-padding w3-padding-16 w3-border w3-round-large w3-margin-bottom" style="display:none;">
+				<div class="w3-third">
+				    <input class="w3-input w3-border" type="text" placeholder="One">
+				</div>
+				<div class="w3-third">
+					<input class="w3-input w3-border" type="text" placeholder="Two">
+				</div>
+				<div class="w3-third">
+					<input class="w3-input w3-border" type="text" placeholder="Three">
+				</div>
+				<div class="w3-right w3-margin-top w3-margin-right">
+					<button class="w3-button w3-black w3-round-xxlarge" onclick="">確定</button>
+				</div>
+			</div>
 			<!-- About Section -->
 			<ul class="w3-ul w3-card-4 w3-white" id="ul_findPost">
 				<li class="w3-bar">

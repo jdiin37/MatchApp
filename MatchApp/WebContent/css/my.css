@@ -5,6 +5,9 @@ h1,h2,h3,h4,h5,h6{
 	font-family: Verdana,Microsoft YaHei, sans-serif !important;
 }
 
+hr{
+	border-color:#ddd;
+}
 .my_black{color:#fff!important;background-color:#242729!important}
 .border_my_black{border-color:#242729!important}
 
@@ -112,4 +115,15 @@ b{
 
 #topBar{
 	padding-top:8px;
+}
+
+.li_postitem:hover{
+	cursor:pointer;
+	background-color:#ddd;
+}
+
+.li_postitem:active{
+	cursor:pointer;
+	background-color:black;
+	color:white;
 }

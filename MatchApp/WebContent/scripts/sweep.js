@@ -35,7 +35,7 @@ function menuDropdown() {
 
 //block UI
 function setBlock(second){	
-	$.blockUI({ message: '<span class="w3-xxlarge">資料讀取中</span>',css: {
+	$.blockUI({ message: '<span class="w3-xxlarge">請稍後..</span>',css: {
         border: 'none',
         padding: '15px',
         backgroundColor: '#000',
@@ -191,23 +191,55 @@ function clickFindRefresh(element){
 	
 }
 
+
 function createPost(data){
 	var ul = $('#ul_findPost');
 	ul.html("");
 	var li = "";
 	$.each(data,function(index,obj){
-		li = '<li class="w3-bar">' +
+		li = '<li class="w3-bar li_postitem" onclick="clickPostItem(this);">' +
 		     '<div class="w3-bar-item">#<span class="post_item">' + obj.id + '</span></div>' +
 		     '<div class="w3-bar-item">' +
-		     '<span class="w3-large">' +obj.location+ '</span><span>'+obj.location_desc +'</span><br>' +
-		     '<span>' + obj.demand_desc +'</span>' +
+		     '<span class="w3-large title1">' +obj.location+ '</span><span class="title2">'+obj.location_desc +'</span><br>' +
+		     '<span class="desc">' + obj.demand_desc +'</span>' +
 		     '</div>'+
-		     '<div class="w3-right w3-bar-item "><br/><span>' + obj.user_id +'</span></div>' +
+		     '<div class="w3-right w3-bar-item "><br/><span class="post_user">' + obj.user_id +'</span>&nbsp;<span class="cre_time">' + obj.cre_date.substr(0,obj.cre_date.length - 2)+ '</span></div>' +
 		     '</li>';
 		ul.append(li);
 		imgObj_array.push({post_id:obj.id});
 	});
-	getImgs();
+	
+//	$('li').click(function(){
+//		alert('aaa');
+//	});
+	//getImgs();
+}
+
+function clickPostItem(element){
+	var location = $(element).find('.title1').text();
+	var location_desc = $(element).find('.title2').text();
+	var desc = $(element).find('.desc').text();
+	var post_user = $(element).find('.post_user').text();
+	var cre_time = $(element).find('.cre_time').text();
+	$('#span_post_title1').text(location);
+	$('#span_post_title2').text(location_desc);
+	$('#span_post_user').text(post_user);
+	$('#span_post_time').text(cre_time);
+	$('#div_post_content').text(desc);
+	togglePostModdal();
+	//alert(title);
+	
+}
+
+function togglePostModdal(){
+	
+	if($("#postModal").css("display") == "none"){
+		$("html,body").css("overflow","hidden");
+		$("#postModal").css("display","block");				
+	}else{
+		$("html,body").css("overflow","auto");
+		$("#postModal").css("display","none");		
+	}
 }
 
 function clickPre10(element){	
@@ -287,6 +319,16 @@ function getImgs(){
 			});
 		}
 	});
+}
+
+//click clickAdvQuery
+function clickAdvQuery(element){
+	$('#div_advQuery').fadeToggle();
+}
+
+//clickCloseModal 
+function clickCloseModal(element){
+	togglePostModdal();
 }
 
 //post click function
@@ -465,12 +507,12 @@ function bindListener(){
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
-//		var modal = document.getElementById('login_Modal');
-//		if (event.target == modal) {
-//			$('#login_Modal').css('display', "none");
-//		}
-		//var x = document.getElementById("menu_user");
-		//alert(event.target);
+		var modal = document.getElementById('postModal');
+		if (event.target == modal) {
+			togglePostModdal();
+		}
+//		var x = document.getElementById("menu_user");
+//		alert(event.target);
 //		if (event.target == x && event.target != y) {
 //			x.className = x.className.replace(" w3-show", "");
 //		}

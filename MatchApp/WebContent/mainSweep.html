@@ -98,27 +98,27 @@
 	
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
-		<div class="w3-bar w3-white w3-card" style="letter-spacing: 4px; left: 10px;" id="topBar">
-			<a href="" class="w3-bar-item w3-button w3-hover-white">Dasao</a>
+		<div class="w3-bar w3-black w3-card" style="letter-spacing: 4px; left: 10px;" id="topBar">
+			<a href="" class="w3-bar-item w3-button w3-hover-black">Dasao</a>
 			<a class="w3-bar-item"></a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
 			<div class="w3-right w3-mobile">
 
 				<a href="#mainPage" id="defaultOpen" onclick="Page_change('mainPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-white">首頁</a>
+					class="myPagelink w3-bar-item w3-button w3-hover-black" id="a_mainPage">首頁</a>
 				<a href="#post" onclick="Page_change('postPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-white">發佈打掃訊息</a>
+					class="myPagelink w3-bar-item w3-button w3-hover-black" id="a_postPage">發佈打掃訊息</a>
 				<a href="#list" onclick="Page_change('listPage', this)"
-					class="myPagelink w3-bar-item w3-button w3-hover-white">我要幫忙打掃</a>
-				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-white">登入</a>
-				<div class="w3-dropdown-click w3-round" id="a_loginOK" style="display: none;">
-					<button class="w3-button w3-white w3-hover-white w3-round" onclick="menuDropdown()">
+					class="myPagelink w3-bar-item w3-button w3-hover-black" id="a_listPage">我要幫忙打掃</a>
+				<a href="/MatchApp/Login.html" id="a_login" class="w3-bar-item w3-button w3-hover-black">登入</a>
+				<div class="w3-dropdown-click w3-round w3-hover-black" id="a_loginOK" style="display: none;">
+					<button class="w3-button w3-round w3-hover-black" onclick="menuDropdown()">
 						哈囉&nbsp;<span id=span_user_id></span>&ensp;<span class="fa fa-angle-down"></span>
 					</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" id="menu_user" style="right: 0">
-						<a href="#" class="w3-bar-item w3-button w3-hover-light-gray">基本資料</a>
-						<a href="#" class="w3-bar-item w3-button w3-hover-light-gray" onclick="loginOut();">登出</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black">基本資料</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black" onclick="loginOut();">登出</a>
 					</div>
 				</div>
 
@@ -137,21 +137,30 @@
 		<div class="w3-content myPage w3-padding" id="mainPage">			
 			<h1 class="w3-xxlarge w3-margin-left">歡迎使用 Dasao 打掃媒合平台</h1>
 			<!-- About Section -->
-				<div class="w3-container w3-half" id="mainInfo1">
-				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
-				    <h2>發佈</h2>
-				    <p>點選發佈打掃訊息,輸入需求後即可發布</p>
+				<div class="w3-card-4 w3-margin" id="mainInfo1">
+				  <header class="w3-container w3-light-blue">
+				    <h3>發佈</h3>
+				   </header>
+				   <div class="w3-container">
+				    <p>點選<span class="link_span" onclick="clickElent('a_postPage')">發佈打掃訊息</span>,可發布打掃需求</p>
 				  </div>
 				</div>
-				<div class="w3-container w3-half" id="mainInfo2">
-				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
-				    <h2>打掃</h2>
-				    <p>點選我要幫忙打掃,即可查看所有訊息</p>
+				
+				
+				
+				<div class="w3-card-4 w3-margin" id="mainInfo2">
+				  <header class="w3-container w3-light-blue">
+				    <h3>打掃</h3>
+				   </header>
+				   <div class="w3-container">
+				    <p>點選<span class="link_span" onclick="clickElent('a_listPage')">我要幫忙打掃</span>,可查看所有發布訊息</p>
 				  </div>
 				</div>
-				<div class="w3-container" id="mainInfo3">
-				  <div class="w3-panel w3-white w3-bottombar border_my_black w3-border w3-round-large">
-				    <h2>個人紀錄</h2>
+				<div class="w3-card-4 w3-margin" id="mainInfo3">
+				  <header class="w3-container w3-light-blue">
+				    <h3>個人紀錄</h3>
+				   </header> 
+				   <div class="w3-container">
 				    <p>您已完成的打掃: 1</p>
 				    	<div class="border_my_black w3-border w3-round-large">
 				    		<p style="margin-left:6px">2017/01/09 屏東市 整理道路</p>
@@ -355,6 +364,11 @@
 	            scrollTop: 0
 	        }, 100);
 			PageInitial(PageName);	
+		}
+		
+		function clickElent(id){
+			$('#' + id).trigger( "click" );
+			
 		}
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();

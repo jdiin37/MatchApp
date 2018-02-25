@@ -54,9 +54,9 @@ function PageInitial(page){
 	switch(page) {
 	case "mainPage":
 		//$('#mainInfo1,#mainInfo2,#mainInfo3').hide();
-		$('#mainInfo1 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
-		$('#mainInfo2 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
-		$('#mainInfo3 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+//		$('#mainInfo1 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+//		$('#mainInfo2 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+//		$('#mainInfo3 div').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
 
 //		$('#mainInfo1 h2').fadeIn("slow",function(){
 //			$('#mainInfo2 h2').fadeIn("slow",function(){
@@ -67,7 +67,7 @@ function PageInitial(page){
 	case "postPage":
 //		$("#postPage").hide();
 //		$("#postPage").slideDown("slow");
-		$('#post_content').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
+//		$('#post_content').css('-webkit-animation-name','whitetoblack').css('-webkit-animation-duration','2s').css('animation-name','whitetoblack').css('animation-duration','2s');
 		
 		if(checkisLogin()){
 			$('#btn_post').show();

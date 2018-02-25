@@ -5,6 +5,9 @@ h1,h2,h3,h4,h5,h6{
 	font-family: Verdana,Microsoft YaHei, sans-serif !important;
 }
 
+
+.w3-dropdown-click:hover > .w3-button:first-child{background-color:#000;color:#fff}
+
 hr{
 	border-color:#ddd;
 }
@@ -23,6 +26,17 @@ hr{
      from {color: white;}
     to {color: black;}
 }
+
+
+.link_span{
+	text-decoration: underline;
+	padding:4px;
+	cursor: pointer;
+}
+.link_span:hover{
+	opacity:0.7;	
+}
+
 
 /* #mainPage .w3-panel:hover{ */
 /* 	background-color:black !important; */

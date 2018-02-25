@@ -37,6 +37,10 @@ hr{
 	opacity:0.7;	
 }
 
+.pre-scrollable600 {
+  max-height: 600px;
+  overflow-y: scroll;
+}
 
 /* #mainPage .w3-panel:hover{ */
 /* 	background-color:black !important; */
@@ -85,7 +89,16 @@ hr{
 .mainfooter{
 	color:#fff !important;
 /*  	background-color:#ff9800 !important;  */
- 	background-color:#242729 !important; 
+/*  	background-color:#242729 !important;  */
+	background-color:black;
+ 	bottom: 0; 
+}
+
+@media (max-height: 800px){
+	.mainfooter{
+	 	position: relative; 
+	 	bottom: none; 
+ 	}
 }
 
 body{

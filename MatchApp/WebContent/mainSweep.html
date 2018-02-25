@@ -78,7 +78,7 @@
 				<textarea id="textarea_comment" class="w3-input w3-border w3-round-large w3-margin-bottom" rows="4"  style="resize: none;display:inline-block"></textarea>
 				<div class="w3-row-padding">
 					&nbsp;
-					<button class="w3-button w3-black w3-round-xxlarge w3-right" onclick="">確定</button>
+					<button class="w3-btn w3-light-blue w3-round-xxlarge w3-right" onclick="">確定</button>
 				</div>
 			</div>
 			<hr/>
@@ -99,7 +99,7 @@
 	<!-- Navbar (sit on top) -->
 	<div class="w3-top">
 		<div class="w3-bar w3-black w3-card" style="letter-spacing: 4px; left: 10px;" id="topBar">
-			<a href="" class="w3-bar-item w3-button w3-hover-black">Dasao</a>
+			<a href="" class="w3-bar-item w3-button w3-hover-black">Dasao 打掃媒合平台</a>
 			<a class="w3-bar-item"></a>
 			<!-- Right-sided navbar links. Hide them on small screens -->
 
@@ -135,9 +135,9 @@
 	<!-- Page content -->
 	<div class="container RWD_marginTop">
 		<div class="w3-content myPage w3-padding" id="mainPage">			
-			<h1 class="w3-xxlarge w3-margin-left">歡迎使用 Dasao 打掃媒合平台</h1>
+<!-- 			<h1 class="w3-xxlarge w3-margin-left w3-center">打掃媒合平台</h1> -->
 			<!-- About Section -->
-				<div class="w3-card-4 w3-margin" id="mainInfo1">
+				<div class="w3-card-4 w3-margin-top" id="mainInfo1">
 				  <header class="w3-container w3-light-blue">
 				    <h3>發佈</h3>
 				   </header>
@@ -145,10 +145,8 @@
 				    <p>點選<span class="link_span" onclick="clickElent('a_postPage')">發佈打掃訊息</span>,可發布打掃需求</p>
 				  </div>
 				</div>
-				
-				
-				
-				<div class="w3-card-4 w3-margin" id="mainInfo2">
+							
+				<div class="w3-card-4 w3-margin-top" id="mainInfo2">
 				  <header class="w3-container w3-light-blue">
 				    <h3>打掃</h3>
 				   </header>
@@ -156,17 +154,17 @@
 				    <p>點選<span class="link_span" onclick="clickElent('a_listPage')">我要幫忙打掃</span>,可查看所有發布訊息</p>
 				  </div>
 				</div>
-				<div class="w3-card-4 w3-margin" id="mainInfo3">
+				<div class="w3-card-4 w3-margin-top w3-margin-bottom" id="mainInfo3">
 				  <header class="w3-container w3-light-blue">
 				    <h3>個人紀錄</h3>
 				   </header> 
 				   <div class="w3-container">
 				    <p>您已完成的打掃: 1</p>
-				    	<div class="border_my_black w3-border w3-round-large">
+				    	<div class="border_my_black w3-border">
 				    		<p style="margin-left:6px">2017/01/09 屏東市 整理道路</p>
 				    	</div>
 				    <p>您正在發布的打掃: 2</p>
-				    	<div class="border_my_black w3-border w3-round-large">
+				    	<div class="border_my_black w3-border">
 				    		<p style="margin-left:6px">2018/01/01 屏東市 住家整理</p>
 				    		<p style="margin-left:6px">2018/01/01 屏東市 花園整理</p>
 				    	</div>
@@ -176,28 +174,28 @@
 		</div>
 		
 		<div class="w3-content myPage w3-padding" style="display: none;margin-bottom:16px!important;" id="postPage">				
-			<div class="tab_myblack">
-				<div class="w3-container my_black w3-center tab_header">
-					<h2>找人打掃</h2>
-				</div>
-				<br />
-				<div class="w3-container">
+			<div class="w3-card-4 w3-margin-top">
+				<header class="w3-container w3-light-blue">
+					<h3 class="w3-center">發佈打掃訊息</h3>
+				</header> 
+				<div class="w3-container w3-padding">
+					
 					<div class="w3-row-padding" id="post_content">	
-							<div style="margin-bottom:10px;">
-								<b>選擇地區</b>
+							<div style="margin-bottom:10px;margin-top:10px;">
+								<span>選擇地區</span>
 								<select id="select_location" class="w3-select w3-border w3-round-large" name="option" >
 								</select>
 							</div>
-							<div style="margin-bottom:10px;">
-								<b>地址</b>&ensp;<span></span>
+							<div style="margin-bottom:10px;margin-top:10px;">
+								<span>地址</span>&ensp;<span></span>
 								<input id="post_location_desc" class="w3-input w3-border w3-round-large" type="text" >
 							</div>
-							<div style="margin-bottom:10px;">
-								<b>說明需求</b>&ensp;<span></span>
+							<div style="margin-bottom:10px;margin-top:10px;">
+								<span>說明需求</span>&ensp;<span></span>
 								<textarea id="post_demand_desc" class="w3-input w3-border w3-round-large" rows="6"  style="resize: none"></textarea>
 							</div>
-							<div style="margin-bottom:10px;">
-								<b>費用</b>&ensp;<span></span>
+							<div style="margin-bottom:10px;margin-top:10px;">
+								<span>費用</span>&ensp;<span></span>
 								<input id="post_fee" class="w3-input w3-border w3-round-large" type="text">
 							</div>
 <!-- 							<b>圖片</b>&ensp;<span></span> -->
@@ -207,11 +205,14 @@
 <!-- 								<div id="img_panel" class="w3-row-padding w3-margin-top"></div> -->
 <!-- 							</div> -->
 					</div>
-					<div class="w3-center">
-						<button class="w3-btn my_black w3-round-large" id="btn_post" onclick="clickPost(this);">發佈</button>
+					
+				</div>
+				<footer class="w3-container">
+					<div class="w3-center w3-padding">
+						<button class="w3-btn w3-light-blue w3-round-xxlarge" id="btn_post" onclick="clickPost(this);">發佈</button>
 						&ensp;<span id="post_status" style="color: red;"></span>
 					</div>
-				</div>
+				</footer>
 			</div>
 		</div>
 	
@@ -219,14 +220,14 @@
 			<div class="w3-row-padding w3-padding-16">
 				<div class="w3-half">
 					&ensp;
-					<span class="w3-tag w3-xlarge" style="transform:rotate(-10deg)">打</span>
-					<span class="w3-tag w3-xlarge">掃</span>
-					<span class="w3-tag w3-xlarge">清</span>
-					<span class="w3-tag w3-xlarge">單</span> 
+					<span class="w3-tag w3-light-blue w3-xlarge" style="transform:rotate(-10deg)">打</span>
+					<span class="w3-tag w3-light-blue w3-xlarge">掃</span>
+					<span class="w3-tag w3-light-blue w3-xlarge">清</span>
+					<span class="w3-tag w3-light-blue w3-xlarge">單</span> 
 				</div>
 				<div class="w3-right">
-					<button class="w3-button w3-black w3-round-xxlarge" id="btn_advQuery" onclick="clickAdvQuery(this);">進階查詢</button>
-					<button class="w3-button w3-black w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">回到第一頁</button>
+					<button class="w3-btn w3-light-blue w3-round-xxlarge" id="btn_advQuery" onclick="clickAdvQuery(this);">進階查詢</button>
+					<button class="w3-btn w3-light-blue w3-round-xxlarge" id="btn_findRefresh" onclick="clickFindRefresh(this);">回到第一頁</button>
 				</div>	
 			</div>		
 			<div id="div_advQuery" class="w3-row-padding w3-padding-16 w3-border w3-round-large w3-margin-bottom" style="display:none;">
@@ -244,7 +245,7 @@
 				</div>
 			</div>
 			<!-- About Section -->
-			<ul class="w3-ul w3-card-4 w3-white" id="ul_findPost">
+			<ul class="w3-ul w3-card-4 w3-white pre-scrollable600" id="ul_findPost">
 				<li class="w3-bar">
 			      <div class="w3-bar-item">
 			        <span class="w3-large">找不到資料</span><br>
@@ -255,36 +256,31 @@
 			</ul>
 			
 			<div class="w3-center w3-section">
-				<button class="w3-button w3-black w3-round-xxlarge" onclick="clickPre10(this);"><i class="fa fa-angle-left"></i> 上一頁</button>
-				<button class="w3-button w3-black w3-round-xxlarge" onclick="clickNext10(this);">下一頁 <i class="fa fa-angle-right"></i></button>
+				<button class="w3-btn w3-light-blue w3-round-xxlarge" onclick="clickPre10(this);"><i class="fa fa-angle-left"></i> 上一頁</button>
+				<button class="w3-btn w3-light-blue w3-round-xxlarge" onclick="clickNext10(this);">下一頁 <i class="fa fa-angle-right"></i></button>
 			</div>				
 		</div>
 	</div>
 	<!-- End page content -->
 	<!-- Footer -->
-	<footer class="w3-center w3-row-padding w3-padding-32 mainfooter">
-		
-		<div class="w3-third">
-			<p class="w3-large">關於 Dasao</p>
-			<p>聯絡我們</p>
-			<p>聯絡我們</p>
-			<p>聯絡我們</p>
-		</div>
-
-		<div class="w3-third">
-			<p class="w3-large">關於 Dasao</p>
-			<p>聯絡我們</p>
-			<p>聯絡我們</p>
-			<p>聯絡我們</p>
-		</div>
-
-		<div class="w3-third">
-			<p class="w3-large">關於 Dasao</p>
-			<p>聯絡我們</p>
-			<p>聯絡我們</p>
-			<p>聯絡我們</p>
-		</div>
-	</footer>
+<!-- 	<footer class="mainfooter"> -->
+<!-- 		<div class="w3-center w3-row-padding w3-padding-32"> -->
+<!-- 			<div class="w3-third"> -->
+<!-- 				<p class="w3-large">關於 Dasao</p> -->
+<!-- 				<p>聯絡我們</p> -->
+<!-- 			</div> -->
+	
+<!-- 			<div class="w3-third"> -->
+<!-- 				<p class="w3-large">關於 Dasao</p> -->
+<!-- 				<p>聯絡我們</p> -->
+<!-- 			</div> -->
+	
+<!-- 			<div class="w3-third"> -->
+<!-- 				<p class="w3-large">關於 Dasao</p> -->
+<!-- 				<p>聯絡我們</p> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</footer> -->
 	<script>
 		//var ws = new WebSocket('ws://localhost:8443');
 		function getUrl() {
